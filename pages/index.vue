@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>Harstem Road to Rank 1 Stats</h1>
-  </div>
+  <main>
+    <TheMMRLineChart />
+  </main>
 </template>
 
 <script lang="ts">
@@ -12,4 +12,12 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style>
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+</style>

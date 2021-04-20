@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div :style="`background-image: url(${backgroundImageURL});`">
+    <div
+      class="background"
+      :style="`background-image: url(${backgroundImageURL});`"
+    >
+      <TheNavBar />
       <Nuxt />
     </div>
   </div>
@@ -12,8 +16,9 @@ import { defineComponent, useContext } from "@nuxtjs/composition-api";
 export default defineComponent({
   setup() {
     const context = useContext();
-    const backgroundImageURL = getBackgroundImageURL(context.$cloudinary);
-    console.log(backgroundImageURL);
+    const backgroundImageURL: String = getBackgroundImageURL(
+      context.$cloudinary
+    );
     return {
       backgroundImageURL
     };
@@ -33,4 +38,11 @@ function getBackgroundImageURL(cloudinary: any) {
 }
 </script>
 
-<style></style>
+<style>
+.background {
+  min-height: 100vh;
+  background-position: 0 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+</style>

@@ -16,11 +16,10 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ["@/assets/global.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["@/plugins/composition-api"],
+  plugins: ["@/plugins/composition-api", { src: "~/plugins/highcharts.js" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -29,7 +28,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
-    "@nuxtjs/composition-api/module"
+    "@nuxtjs/composition-api/module",
+    "@nuxtjs/google-fonts"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -52,5 +52,11 @@ export default {
   generate: {
     interval: 2000
   },
-  transpile: [/@vue[\\/]composition-api/]
+  transpile: [/@vue[\\/]composition-api/],
+
+  googleFonts: {
+    families: {
+      "Source+Sans+Pro": true
+    }
+  }
 };

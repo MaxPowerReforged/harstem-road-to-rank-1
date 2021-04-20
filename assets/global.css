@@ -1,0 +1,33 @@
+body {
+  color: white;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+@font-face {
+  font-family: "Eurostile";
+  src: url("~assets/fonts/EurostileExtended.otf") format("opentype");
+}
+
+h1 {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 80%), 0 8px 16px rgb(0 0 0 / 60%);
+  color: #fff;
+  font-family: Eurostile, Source Sans Pro, sans-serif;
+}
+
+h2 {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 80%), 0 8px 16px rgb(0 0 0 / 60%);
+  color: #fff;
+  font-family: Eurostile, Source Sans Pro, sans-serif;
+}
+
+h3 {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 80%), 0 8px 16px rgb(0 0 0 / 60%);
+  color: #fff;
+  font-family: Eurostile, Source Sans Pro, sans-serif;
+}
