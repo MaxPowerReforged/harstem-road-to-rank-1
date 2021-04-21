@@ -10,10 +10,15 @@ export default {
   data() {
     return {
       chartOptions: {
+        title: false,
         chart: {
-          type: "column",
+          type: "line",
           backgroundColor: "transparent",
-          width: 800
+          width: 800,
+          style: {
+            fontFamily: "Eurostile",
+            fontSize: "14px"
+          }
         },
         xAxis: {
           type: "category"
@@ -23,97 +28,79 @@ export default {
         },
         plotOptions: {
           series: {
+            color: "#A3C5E1", // for hover maybe "#83ADD8",
+            shadow: {
+              color: "#4585C4",
+              width: 9,
+              offsetX: 0,
+              offsetY: 0
+            },
             maxPointWidth: 40,
             borderWidth: 3,
             dataLabels: {
-              enabled: true,
-              format: '<span style="color:{point.color}">{point.y}%</span>',
-              style: {
-                textOutline: "none",
-                fontWeight: "regular"
-              }
+              enabled: false
+            },
+            marker: {
+              fillColor: "#E0ECF5"
             }
           }
         },
         tooltip: {
           headerFormat: "",
-          pointFormat: `<span style="color:{point.color}">{point.name}:</span> {point.y:.2f}%
+          pointFormat: `<span style="color:white">{point.name}:</span> {point.y}
               <br>Wins: {point.wins}
               <br>Losses: {point.loses}
               <br>Total: {point.total}`,
-          backgroundColor: colors.dark,
+          backgroundColor: "rgba(20, 36, 51, 0.9)",
+          borderRadius: 5,
+          boxShadow: "inset 0 0 20px rgb(102 179 255 / 20%)",
           style: {
-            color: colors.primaryBrighter
-          },
-          borderRadius: 0
+            color: "#83ADD8",
+            border: "2px solid #22476b",
+            fontFamily: "Source Sans Pro"
+          }
         },
         xAxis: {
+          // labels: {
+          //   useHTML: true,
+          //   formatter: function() {
+          //     return (
+          //       '<img src="' +
+          //       imgSrc[this.value] +
+          //       '" style="width: 50px; height: 50px;">'
+          //     );
+          //   }
+          // },
           labels: {
-            useHTML: true,
-            formatter: function() {
-              return (
-                '<img src="' +
-                imgSrc[this.value] +
-                '" style="width: 50px; height: 50px;">'
-              );
+            format: "{value}",
+            style: {
+              color: "white"
             }
           },
-          lineColor: colors.primaryDarker,
-          tickColor: colors.primaryDarker
+          lineColor: "#22476b",
+          tickColor: "#22476b"
         },
         yAxis: {
           labels: {
-            format: "{value}%",
+            format: "{value}",
             style: {
-              color: colors.primaryDarker
+              color: "white"
             }
           },
           title: {
-            text: "Relative faction winrate",
+            text: "MMR",
             style: {
-              color: colors.primaryDarker
+              color: "white",
+              fontFamily: "Eurostile"
             }
           },
-          gridLineColor: colors.primaryDarker
+          gridLineColor: "#22476b"
         },
         series: [
           {
             data: [
               {
-                y: 18,
-                color: colors["ironHillsPrimary"], //TODO generate dynamically via faction name
-                borderColor: colors["ironHillsSecondary"],
-                name: "Iron Hills",
-                faction: "ironHills",
-                wins: this.$t("navBar.statistics.general"),
-                loses: 4, //TODO is not loses, it is total
-                total: 7
-              },
-              {
-                y: 45,
-                color: colors["gondorPrimary"],
-                borderColor: colors["gondorSecondary"],
-                name: "Gondor",
-                faction: "gondor",
-                wins: 3,
-                loses: 4,
-                total: 7
-              },
-              {
-                y: 67,
-                color: "green",
-                name: "Lothlorien",
-                faction: "lothlorien",
-                color: colors["lothlorienPrimary"],
-                borderColor: colors["lothlorienSecondary"],
-                wins: 3,
-                loses: 4,
-                total: 7
-              },
-              {
-                y: 35,
-                color: colors["angmarPrimary"],
-                borderColor: colors["angmarSecondary"],
+                y: 6657,
                 name: "Angmar",
                 faction: "angmar",
                 wins: 3,
@@ -121,9 +108,31 @@ export default {
                 total: 7
               },
               {
-                y: 53,
-                color: colors["mordorPrimary"],
-                borderColor: colors["mordorSecondary"],
+                y: 6678,
+                name: "Mordor",
+                faction: "mordor",
+                wins: 4,
+                loses: 4,
+                total: 8
+              },
+              {
+                y: 6646,
+                name: "Mordor",
+                faction: "mordor",
+                wins: 4,
+                loses: 4,
+                total: 8
+              },
+              {
+                y: 6687,
+                name: "Mordor",
+                faction: "mordor",
+                wins: 4,
+                loses: 4,
+                total: 8
+              },
+              {
+                y: 6658,
                 name: "Mordor",
                 faction: "mordor",
                 wins: 4,
@@ -156,5 +165,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.highcharts-tooltip {
+  background: rgba(20, 36, 51, 0.8)
+    linear-gradient(0deg, rgba(20, 61, 102, 0.2), rgba(20, 61, 102, 0) 50%);
+  border: 2px solid #22476b;
+  box-shadow: inset 0 0 20px rgb(102 179 255 / 20%);
+  border-radius: 5px;
 }
 </style>

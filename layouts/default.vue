@@ -2,7 +2,9 @@
   <div>
     <div
       class="background"
-      :style="`background-image: url(${backgroundImageURL});`"
+      :style="
+        `background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImageURL});`
+      "
     >
       <TheNavBar />
       <Nuxt />
