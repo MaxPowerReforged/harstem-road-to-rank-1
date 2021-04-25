@@ -1,5 +1,6 @@
 <template>
   <main>
+    <TheProfileCard />
     <TheMMRLineChart />
   </main>
 </template>
@@ -15,8 +16,7 @@ export default defineComponent({
 <style>
 main {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
 }
