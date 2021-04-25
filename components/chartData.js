@@ -1,13 +1,9 @@
 export const chartData = [
   {
-    x: 1618924295,
-    y: 6657,
-    map: "Nightshade"
-  },
-  {
     x: 1619023851,
     y: 6665,
-    map: "Nightshade"
+    map: "Nightshade",
+    decision: "Win"
   },
   {
     x: 1619024404,

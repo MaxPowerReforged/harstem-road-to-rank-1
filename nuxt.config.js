@@ -19,11 +19,7 @@ export default {
   css: ["@/assets/global.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    "@/plugins/composition-api",
-    { src: "~/plugins/highcharts.js" }
-    //"@/plugins/blizzard-api"
-  ],
+  plugins: ["@/plugins/composition-api", { src: "~/plugins/highcharts.js" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -42,7 +38,8 @@ export default {
     "bootstrap-vue/nuxt",
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    "@nuxtjs/cloudinary"
+    "@nuxtjs/cloudinary",
+    "@nuxtjs/firebase"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -61,6 +58,22 @@ export default {
   googleFonts: {
     families: {
       "Source+Sans+Pro": true
+    }
+  },
+
+  firebase: {
+    config: {
+      apiKey: "AIzaSyDhCqlVaZ7yb-C2oKnqPwLw9AuceOdGmh4",
+      authDomain: "harstem-stats-scrapper.firebaseapp.com",
+      projectId: "harstem-stats-scrapper",
+      databaseURL: "https://harstem-stats-scrapper.firebaseio.com",
+      storageBucket: "harstem-stats-scrapper.appspot.com",
+      messagingSenderId: "825831833642",
+      appId: "1:825831833642:web:5edd3f1f916941ad3e0353"
+    },
+    services: {
+      database: true,
+      firestore: true
     }
   }
 };

@@ -34,9 +34,16 @@ export const chartOptions = {
     }
   },
   tooltip: {
+    useHTML: true,
     headerFormat: "",
-    pointFormat: `<span style="color:white">MMR:</span> {point.y}
-        <br>Map: {point.map}`,
+    formatter: function() {
+      const formattedDate = new Date(this.x).toLocaleString();
+      return `
+      <span style="color:white">Date:</span> ${formattedDate}
+      <br><span style="color:white">MMR:</span> ${this.y}
+      <br><span style="color:white">Map:</span> ${this.point.map}
+      <br><span style="color:white">Decision:</span> ${this.point.decision}`;
+    },
     backgroundColor: "rgba(20, 36, 51, 0.9)",
     borderRadius: 5,
     boxShadow: "inset 0 0 20px rgb(102 179 255 / 20%)",
@@ -50,7 +57,7 @@ export const chartOptions = {
     labels: {
       useHTML: true,
       formatter: function() {
-        return new Date(this.value * 1000).toLocaleString();
+        return new Date(this.value * 1000).toLocaleDateString();
       },
       style: {
         color: "white"

@@ -3,10 +3,10 @@
     <h2>Harstem</h2>
     <ul class="stats">
       <li>Race: Protoss <img :src="protossIcon" alt="Protoss icon" /></li>
-      <li>MMR: 6629</li>
-      <li>Rank: 22</li>
-      <li>Wins: 12</li>
-      <li>Losses: 12</li>
+      <li>MMR: {{ profileData.mmr }}</li>
+      <li>Rank: {{ profileData.rank }}</li>
+      <li>Wins: {{ profileData.wins }}</li>
+      <li>Losses: {{ profileData.losses }}</li>
       <li>
         Watch:
         <a
@@ -20,14 +20,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useContext } from "@nuxtjs/composition-api";
+import { defineComponent, useContext, useAsync } from "@nuxtjs/composition-api";
 
 export default defineComponent({
   setup() {
     const context = useContext();
     const protossIcon: String = getProtossIcon(context.$cloudinary);
+    const profileData: Object = useAsync(() =>
+      getProfileData(context.$fire.firestore)
+    );
     return {
-      protossIcon
+      protossIcon,
+      profileData
     };
   }
 });
@@ -42,6 +46,15 @@ function getProtossIcon(cloudinary: any) {
       width: "auto"
     }
   );
+}
+
+async function getProfileData(firestore: any) {
+  const firestoreData = await firestore
+    .collection("harstemRoadRankOneMetadata")
+    .doc("lastRecord")
+    .get();
+  console.log(firestoreData.data());
+  return firestoreData.data();
 }
 </script>
 
