@@ -56,7 +56,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   cloudinary: {
-    cloudName: process.env.CLOUDINARY_NAME
+    cloudName: "dqrpm2gb0"
   },
   generate: {
     interval: 2000
