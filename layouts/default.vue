@@ -46,5 +46,6 @@ function getBackgroundImageURL(cloudinary: any) {
   background-position: 0 0;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #000307;
 }
 </style>

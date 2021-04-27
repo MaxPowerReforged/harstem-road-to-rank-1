@@ -15,7 +15,20 @@
 
       <b-collapse id="nav-collapse" is-nav class="ml-auto">
         <b-navbar-nav>
-          <b-nav-item to="/">Road to Rank I</b-nav-item>
+          <b-nav-item
+            class="nav-link"
+            exact-active-class="active-nav-link"
+            exact
+            to="/"
+            >Road to Rank I</b-nav-item
+          >
+          <b-nav-item
+            class="nav-link"
+            exact-active-class="active-nav-link"
+            exact
+            to="/bgwss"
+            >BGWSS</b-nav-item
+          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -42,7 +55,7 @@ function getLogoURL(cloudinary: any) {
       fetch_format: "auto",
       crop: "scale",
       quality: "auto",
-      width: 45
+      width: 40
     }
   );
 }
@@ -54,6 +67,10 @@ function getLogoURL(cloudinary: any) {
     linear-gradient(0deg, rgba(20, 61, 102, 0.2), rgba(20, 61, 102, 0) 50%);
   border: 2px solid #22476b;
   box-shadow: inset 0 0 20px rgb(102 179 255 / 20%);
+  padding-top: 0;
+  padding-bottom: 0;
+  align-items: center;
+  height: 50px;
 }
 
 .sc2-logo {

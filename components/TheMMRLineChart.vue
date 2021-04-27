@@ -2,6 +2,9 @@
   <article class="chart-sheet">
     <h2>Ladder MMR</h2>
     <highcharts :options="chartOptions"></highcharts>
+    <div class="loading-placeholder" v-if="loading">
+      <b-spinner class="spinner" label="Loading..."></b-spinner>
+    </div>
   </article>
 </template>
 
@@ -11,7 +14,8 @@ import { chartOptions } from "./chartOptions";
 export default {
   data() {
     return {
-      chartOptions: chartOptions
+      chartOptions: chartOptions,
+      loading: true
     };
   },
   methods: {
@@ -22,6 +26,7 @@ export default {
           this.translateDataObject(match.data())
         );
       });
+      this.loading = false;
     },
     translateDataObject(match) {
       delete Object.assign(match, { ["y"]: match["mmr"] })["mmr"];
@@ -37,6 +42,10 @@ export default {
 </script>
 
 <style>
+article {
+  position: relative;
+}
+
 .chart-sheet {
   height: 500px;
   width: 800px;
@@ -58,5 +67,21 @@ export default {
   border: 2px solid #22476b;
   box-shadow: inset 0 0 20px rgb(102 179 255 / 20%);
   border-radius: 5px;
+}
+
+.loading-placeholder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  border-width: 1px;
+  box-shadow: 0 0 9px #4585c4, 0 0 9px #4585c4 inset;
 }
 </style>

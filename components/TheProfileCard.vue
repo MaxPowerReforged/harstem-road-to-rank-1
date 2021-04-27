@@ -29,29 +29,17 @@ export default {
   data() {
     return {
       latestVideo: "",
-      protossIcon: "",
+      protossIcon: require("~/assets/icons/symbol-protoss.png"),
       profileData: ""
     };
   },
   created() {
     this.getLatestVideo();
-    this.getProtossIcon();
     this.getProfileData();
   },
   methods: {
     async getLatestVideo() {
       this.latestVideo = await this.$youtubeService.getLastYoutubeVideoFromPlaylist();
-    },
-    async getProtossIcon() {
-      this.protossIcon = await this.$cloudinary.image.url(
-        "Harstem-Stats-Road-To-Rank-1/race-symbol-protoss_osk6l7.png",
-        {
-          fetch_format: "auto",
-          crop: "scale",
-          quality: "auto",
-          width: "auto"
-        }
-      );
     },
     async getProfileData() {
       const firestoreData = await this.$fire.firestore
