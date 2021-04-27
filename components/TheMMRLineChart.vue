@@ -30,7 +30,7 @@ export default {
       return match;
     }
   },
-  mounted() {
+  created() {
     this.getLadderData(this.$fire.firestore);
   }
 };

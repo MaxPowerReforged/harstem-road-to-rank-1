@@ -8,7 +8,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "harstem-road-rank-1",
+    title: "Harstem Stats Road to Rank 1",
     htmlAttrs: {
       lang: "en"
     },
