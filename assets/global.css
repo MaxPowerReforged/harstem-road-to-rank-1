@@ -17,6 +17,7 @@ h1 {
 }
 
 h2 {
+  font-size: 1.6rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgb(0 0 0 / 80%), 0 8px 16px rgb(0 0 0 / 60%);
@@ -25,6 +26,15 @@ h2 {
 }
 
 h3 {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 80%), 0 8px 16px rgb(0 0 0 / 60%);
+  color: #fff;
+  font-family: Eurostile, Source Sans Pro, sans-serif;
+}
+
+h4 {
+  font-size: medium;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgb(0 0 0 / 80%), 0 8px 16px rgb(0 0 0 / 60%);

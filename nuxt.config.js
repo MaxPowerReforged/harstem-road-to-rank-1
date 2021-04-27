@@ -2,6 +2,10 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
+  router: {
+    base: "/harstem-road-to-rank-1/"
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "harstem-road-rank-1",
@@ -19,7 +23,11 @@ export default {
   css: ["@/assets/global.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["@/plugins/composition-api", { src: "~/plugins/highcharts.js" }],
+  plugins: [
+    "@/plugins/composition-api",
+    { src: "~/plugins/highcharts.js" },
+    "~/plugins/youtubeService.js"
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -71,6 +79,7 @@ export default {
       messagingSenderId: "825831833642",
       appId: "1:825831833642:web:5edd3f1f916941ad3e0353"
     },
+    terminateDatabasesAfterGenerate: true,
     services: {
       database: true,
       firestore: true

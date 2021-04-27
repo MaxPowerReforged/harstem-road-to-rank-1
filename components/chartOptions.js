@@ -1,5 +1,3 @@
-import { chartData } from "./chartData.js";
-
 export const chartOptions = {
   title: false,
   chart: {
@@ -15,6 +13,9 @@ export const chartOptions = {
     enabled: false
   },
   plotOptions: {
+    line: {
+      pointPlacement: "between"
+    },
     series: {
       color: "#A3C5E1", // for hover maybe "#83ADD8",
       shadow: {
@@ -28,8 +29,10 @@ export const chartOptions = {
       dataLabels: {
         enabled: false
       },
+      stickyTracking: false,
       marker: {
-        fillColor: "#E0ECF5"
+        fillColor: "#E0ECF5",
+        enabled: false
       }
     }
   },
@@ -37,20 +40,37 @@ export const chartOptions = {
     useHTML: true,
     headerFormat: "",
     formatter: function() {
-      const formattedDate = new Date(this.x).toLocaleString();
-      return `
-      <span style="color:white">Date:</span> ${formattedDate}
-      <br><span style="color:white">MMR:</span> ${this.y}
-      <br><span style="color:white">Map:</span> ${this.point.map}
-      <br><span style="color:white">Decision:</span> ${this.point.decision}`;
+      const formattedDate = new Date(this.x * 1000).toLocaleString();
+      const thisIndex = this.series.data.indexOf(this.point);
+      let previousY = 0;
+      if (thisIndex === 0) previousY = this.y;
+      else previousY = this.series.data[thisIndex - 1].y;
+      let tooltipHTML = `<span style="color:white">Date:</span> ${formattedDate}`;
+      if (this.point.opponent)
+        tooltipHTML += `<br><span style="color:white">VS:</span> ${
+          this.point.opponent
+        } (${this.point.opponentRace.charAt(0).toUpperCase()}): ${
+          this.point.opponentMmr
+        }`;
+      tooltipHTML += `<br><span style="color:white">Result:</span> ${this.point.decision}`;
+      tooltipHTML += `<br><span style="color:white">MMR gain:</span> ${this.y -
+        previousY}`;
+      tooltipHTML += `<br><span style="color:white">Map:</span> ${this.point.map}`;
+      tooltipHTML += `<br><span style="color:white">MMR:</span> ${this.y}`;
+      if (this.point.youtubeLink)
+        tooltipHTML += `<br><a target="_blank" href="${this.point.youtubeLink}">Watch</a>`;
+      return tooltipHTML;
     },
     backgroundColor: "rgba(20, 36, 51, 0.9)",
     borderRadius: 5,
     boxShadow: "inset 0 0 20px rgb(102 179 255 / 20%)",
+    hideDelay: 1000,
     style: {
       color: "#83ADD8",
       border: "2px solid #22476b",
-      fontFamily: "Source Sans Pro"
+      fontFamily: "Source Sans Pro",
+      pointerEvents: "auto",
+      fontSize: "14px"
     }
   },
   xAxis: {
@@ -64,7 +84,8 @@ export const chartOptions = {
       }
     },
     lineColor: "#22476b",
-    tickColor: "#22476b"
+    tickColor: "#22476b",
+    ordinal: true
   },
   yAxis: {
     labels: {
@@ -82,11 +103,9 @@ export const chartOptions = {
     },
     gridLineColor: "#22476b"
   },
-  series: [
-    {
-      data: chartData
-    }
-  ],
+  series: {
+    data: []
+  },
   credits: {
     enabled: false
   }

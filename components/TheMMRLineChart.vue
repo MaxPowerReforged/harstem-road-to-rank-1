@@ -6,12 +6,32 @@
 </template>
 
 <script>
-import { chartOptions } from "@/components/chartOptions.js";
+import { chartOptions } from "./chartOptions";
+
 export default {
   data() {
     return {
       chartOptions: chartOptions
     };
+  },
+  methods: {
+    async getLadderData(firestore) {
+      const snapshot = await firestore.collection("harstemRoadRankOne").get();
+      snapshot.forEach(match => {
+        this.chartOptions.series.data.push(
+          this.translateDataObject(match.data())
+        );
+      });
+    },
+    translateDataObject(match) {
+      delete Object.assign(match, { ["y"]: match["mmr"] })["mmr"];
+      delete Object.assign(match, { ["x"]: match["date"] })["date"];
+
+      return match;
+    }
+  },
+  mounted() {
+    this.getLadderData(this.$fire.firestore);
   }
 };
 </script>

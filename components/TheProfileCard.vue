@@ -16,20 +16,30 @@
         >
       </li>
     </ul>
+    <h4>Latest Video:</h4>
+    <iframe
+      width="250px"
+      :src="'https://www.youtube.com/embed/' + latestVideo"
+    ></iframe>
   </aside>
 </template>
 
 <script lang="ts">
+import { NuxtAxiosInstance } from "@nuxtjs/axios";
 import { defineComponent, useContext, useAsync } from "@nuxtjs/composition-api";
 
 export default defineComponent({
   setup() {
     const context = useContext();
+    const latestVideo = useAsync(() =>
+      context.$youtubeService.getLastYoutubeVideoFromPlaylist()
+    );
     const protossIcon: String = getProtossIcon(context.$cloudinary);
     const profileData: Object = useAsync(() =>
       getProfileData(context.$fire.firestore)
     );
     return {
+      latestVideo,
       protossIcon,
       profileData
     };
@@ -53,7 +63,6 @@ async function getProfileData(firestore: any) {
     .collection("harstemRoadRankOneMetadata")
     .doc("lastRecord")
     .get();
-  console.log(firestoreData.data());
   return firestoreData.data();
 }
 </script>

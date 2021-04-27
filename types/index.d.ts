@@ -1,4 +1,5 @@
 import { ClientApi } from "@nuxtjs/cloudinary";
+import { YoutubeService } from "@/types/youtubeServiceClass";
 
 declare module "vue/types/vue" {
   interface Vue {
@@ -13,6 +14,7 @@ declare module "@nuxt/types" {
 
   interface Context {
     $cloudinary: ClientApi;
+    $youtubeService: YoutubeService;
   }
 }
 
