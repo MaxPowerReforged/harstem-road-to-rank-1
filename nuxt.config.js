@@ -48,7 +48,8 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/cloudinary",
     "@nuxtjs/firebase",
-    "nuxt-route-meta"
+    "nuxt-route-meta",
+    "@nuxtjs/svg"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

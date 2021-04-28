@@ -8,7 +8,7 @@
 import { lateralPageTransition } from "@/utils/transitions";
 export default {
   meta: {
-    depth: 1
+    depth: 2
   },
   transition: lateralPageTransition
 };

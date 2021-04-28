@@ -7,7 +7,7 @@
       "
     >
       <TheNavBar />
-      <Nuxt />
+      <Nuxt keep-alive />
     </div>
   </div>
 </template>

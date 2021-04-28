@@ -2,6 +2,7 @@
   <main>
     <TheProfileCard />
     <TheMMRLineChart />
+    <TheRaceWinrateChart />
   </main>
 </template>
 
