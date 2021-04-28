@@ -20,7 +20,7 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
-  css: ["@/assets/global.css"],
+  css: ["@/assets/global.css", "animate.css/animate.compat.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -47,7 +47,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/cloudinary",
-    "@nuxtjs/firebase"
+    "@nuxtjs/firebase",
+    "nuxt-route-meta"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

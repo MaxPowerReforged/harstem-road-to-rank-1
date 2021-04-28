@@ -75,3 +75,16 @@ li.nav-link {
     rgba(0, 128, 255, 0.1)
   );
 }
+
+.slide-right-enter-active {
+  animation: slideInRight 0.5s;
+}
+.slide-right-leave-active {
+  animation: slideOutLeft 0.5s;
+}
+.slide-left-enter-active {
+  animation: slideInLeft 0.5s;
+}
+.slide-left-leave-active {
+  animation: slideOutRight 0.5s;
+}

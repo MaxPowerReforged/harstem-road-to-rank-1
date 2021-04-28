@@ -6,13 +6,12 @@
 </template>
 
 <script>
+import { lateralPageTransition } from "@/utils/transitions";
 export default {
-  transition(to, from) {
-    if (!from) {
-      return "slide-left";
-    }
-    return +to.query.page < +from.query.page ? "slide-right" : "slide-left";
-  }
+  meta: {
+    depth: 1
+  },
+  transition: lateralPageTransition
 };
 </script>
 
