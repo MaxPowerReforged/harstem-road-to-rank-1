@@ -5,12 +5,15 @@
   </main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "@vue/composition-api";
-
-export default defineComponent({
-  setup() {}
-});
+<script>
+export default {
+  transition(to, from) {
+    if (!from) {
+      return "slide-left";
+    }
+    return +to.query.page < +from.query.page ? "slide-right" : "slide-left";
+  }
+};
 </script>
 
 <style>

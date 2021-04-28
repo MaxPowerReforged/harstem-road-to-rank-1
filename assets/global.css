@@ -42,9 +42,13 @@ h4 {
   font-family: Eurostile, Source Sans Pro, sans-serif;
 }
 
+li.nav-link {
+  padding: 0 !important;
+}
+
 .nav-link > a {
   font-family: Eurostile, Source Sans Pro, sans-serif;
-  padding: 1rem;
+  padding: 1rem !important;
   color: #a3c5e1 !important;
   height: 44px;
   display: flex;
