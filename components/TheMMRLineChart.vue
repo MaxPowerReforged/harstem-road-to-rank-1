@@ -1,7 +1,9 @@
 <template>
   <article class="chart-sheet">
     <h2>Ladder MMR</h2>
-    <highcharts :options="chartOptions"></highcharts>
+    <div class="chart-wrapper">
+      <highcharts :options="chartOptions"></highcharts>
+    </div>
     <div class="loading-placeholder" v-if="loading">
       <b-spinner class="spinner" label="Loading..."></b-spinner>
     </div>
@@ -49,7 +51,10 @@ article {
 .chart-sheet {
   height: 500px;
   width: 800px;
+  max-width: 90vw;
   margin-top: 40px;
+  margin-right: 10px;
+  margin-left: 10px;
   padding: 15px;
   background: rgba(20, 36, 51, 0.8)
     linear-gradient(0deg, rgba(20, 61, 102, 0.2), rgba(20, 61, 102, 0) 50%);
@@ -59,6 +64,11 @@ article {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.chart-wrapper {
+  width: 100%;
+  overflow: auto;
 }
 
 .highcharts-tooltip {

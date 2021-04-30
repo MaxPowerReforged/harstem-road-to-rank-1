@@ -1,20 +1,13 @@
 <template>
-  <article class="chart-sheet">
+  <article class="chart-sheet-winrates">
     <h2>Race Winrate</h2>
-    <div class="race-pie-chart-container">
-      <div class="race-icon-chart" v-html="iconProtoss"></div>
-      <highcharts :options="chartOptions"></highcharts>
-    </div>
-    <div class="race-pie-chart-container">
-      <div class="race-icon-chart" v-html="iconTerran"></div>
-      <highcharts :options="chartOptions"></highcharts>
-    </div>
-    <div class="race-pie-chart-container">
-      <div class="race-icon-chart" v-html="iconZerg"></div>
-      <highcharts :options="chartOptions"></highcharts>
-    </div>
-    <div class="loading-placeholder" v-if="loading">
-      <b-spinner class="spinner" label="Loading..."></b-spinner>
+    <div class="chart-container">
+      <RaceChartCard :chartData="chartData" :icon="iconProtoss" />
+      <RaceChartCard :chartData="chartData" :icon="iconTerran" />
+      <RaceChartCard :chartData="chartData" :icon="iconZerg" />
+      <div class="loading-placeholder" v-if="loading">
+        <b-spinner class="spinner" label="Loading..."></b-spinner>
+      </div>
     </div>
   </article>
 </template>
@@ -23,73 +16,35 @@
 import iconProtoss from "~/assets/icons/symbol-protoss.svg?raw";
 import iconTerran from "~/assets/icons/symbol-terran.svg?raw";
 import iconZerg from "~/assets/icons/symbol-zerg.svg?raw";
+
 export default {
   data() {
     return {
+      loading: false,
       iconProtoss: iconProtoss,
       iconTerran: iconTerran,
       iconZerg: iconZerg,
-      chartOptions: {
-        chart: {
-          type: "pie",
-          backgroundColor: "transparent",
-          width: 185,
-          height: 200
+      chartData: [
+        {
+          y: 2,
+          color: "#A3C5E1"
         },
-        plotOptions: {
-          pie: {
-            borderColor: "black",
-            dataLabels: false,
-            borderWidth: 0,
-            allowPointSelect: false,
-            animation: true,
-            innerSize: "93%",
-            size: 80
-          },
-          series: {
-            enableMouseTracking: false,
-            shadow: {
-              color: "#4585C4",
-              width: 9,
-              offsetX: 0,
-              offsetY: 0
-            }
-          }
-        },
-        tooltip: {
-          enabled: false
-        },
-        title: {
-          text: ""
-        },
-        series: [
-          {
-            data: [
-              {
-                y: 2,
-                color: "#A3C5E1"
-              },
-              {
-                y: 5,
-                color: "black"
-              }
-            ]
-          }
-        ],
-        credits: {
-          enabled: false
+        {
+          y: 5,
+          color: "black"
         }
-      }
+      ]
     };
   }
 };
 </script>
 
 <style>
-.chart-sheet {
-  height: 500px;
-  width: 800px;
+.chart-sheet-winrates {
   margin-top: 40px;
+  margin-bottom: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
   padding: 15px;
   background: rgba(20, 36, 51, 0.8)
     linear-gradient(0deg, rgba(20, 61, 102, 0.2), rgba(20, 61, 102, 0) 50%);
@@ -101,27 +56,11 @@ export default {
   align-items: center;
 }
 
-.race-pie-chart-container {
+.chart-container {
   display: flex;
-  width: 100%;
-  position: relative;
-  justify-content: center;
-  text-align: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-}
-.race-icon-chart {
-  color: #a3c5e1;
-  position: absolute;
-  margin: auto;
-  height: 25px;
-  width: 25px;
-  z-index: 100;
-  margin-top: -10px;
-  margin-left: 2px;
-}
-
-.race-icon-chart > svg {
-  filter: drop-shadow(0 0 15px #4585c4);
-  height: 25px;
+  flex-wrap: wrap;
 }
 </style>

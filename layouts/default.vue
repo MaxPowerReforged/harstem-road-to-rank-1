@@ -43,9 +43,11 @@ function getBackgroundImageURL(cloudinary: any) {
 <style>
 .background {
   min-height: 100vh;
+  height: 100%;
   background-position: 0 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #000307;
+  background-attachment: fixed;
 }
 </style>

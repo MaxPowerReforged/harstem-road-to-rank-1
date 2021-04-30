@@ -2,17 +2,26 @@
   <main>
     <TheProfileCard />
     <TheMMRLineChart />
-    <TheRaceWinrateChart />
+    <LazyTheRaceWinrateChart />
   </main>
 </template>
 
 <script>
 import { lateralPageTransition } from "@/utils/transitions";
+import { mapActions } from "vuex";
+
 export default {
   meta: {
     depth: 1
   },
-  transition: lateralPageTransition
+  transition: lateralPageTransition,
+  methods: {
+    ...mapActions("roadToRankOne", ["fetchMetaData", "fetchLadderData"])
+  },
+  created() {
+    this.fetchMetaData();
+    this.fetchLadderData();
+  }
 };
 </script>
 
@@ -21,6 +30,6 @@ main {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100%;
+  flex-wrap: wrap;
 }
 </style>

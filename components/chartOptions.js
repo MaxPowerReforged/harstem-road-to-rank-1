@@ -3,19 +3,19 @@ export const chartOptions = {
   chart: {
     type: "line",
     backgroundColor: "transparent",
-    width: 800,
     style: {
       fontFamily: "Eurostile",
       fontSize: "14px"
+    },
+    scrollablePlotArea: {
+      minWidth: 750,
+      opacity: 0.8
     }
   },
   legend: {
     enabled: false
   },
   plotOptions: {
-    line: {
-      pointPlacement: "between"
-    },
     series: {
       color: "#A3C5E1", // for hover maybe "#83ADD8",
       shadow: {
@@ -85,7 +85,9 @@ export const chartOptions = {
     },
     lineColor: "#22476b",
     tickColor: "#22476b",
-    ordinal: true
+    scrollbar: {
+      enabled: true
+    }
   },
   yAxis: {
     labels: {

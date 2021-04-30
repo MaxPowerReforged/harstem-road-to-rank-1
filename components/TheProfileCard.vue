@@ -3,10 +3,10 @@
     <h2>Harstem</h2>
     <ul class="stats">
       <li>Race: Protoss <img :src="protossIcon" alt="Protoss icon" /></li>
-      <li>MMR: {{ profileData.mmr }}</li>
-      <li>Rank: {{ profileData.rank }}</li>
-      <li>Wins: {{ profileData.wins }}</li>
-      <li>Losses: {{ profileData.losses }}</li>
+      <li>MMR: {{ getMetaData().mmr }}</li>
+      <li>Rank: {{ getMetaData().rank }}</li>
+      <li>Wins: {{ getMetaData().wins }}</li>
+      <li>Losses: {{ getMetaData().losses }}</li>
       <li>
         Watch:
         <a
@@ -25,28 +25,21 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       latestVideo: "",
-      protossIcon: require("~/assets/icons/symbol-protoss.png"),
-      profileData: ""
+      protossIcon: require("~/assets/icons/symbol-protoss.png")
     };
   },
   created() {
     this.getLatestVideo();
-    this.getProfileData();
   },
   methods: {
+    ...mapGetters("roadToRankOne", ["getMetaData"]),
     async getLatestVideo() {
       this.latestVideo = await this.$youtubeService.getLastYoutubeVideoFromPlaylist();
-    },
-    async getProfileData() {
-      const firestoreData = await this.$fire.firestore
-        .collection("harstemRoadRankOneMetadata")
-        .doc("lastRecord")
-        .get();
-      this.profileData = firestoreData.data();
     }
   }
 };
@@ -57,6 +50,8 @@ export default {
   height: 500px;
   width: 300px;
   margin-top: 40px;
+  margin-right: 10px;
+  margin-left: 10px;
   padding: 15px;
   background: rgba(20, 36, 51, 0.8)
     linear-gradient(0deg, rgba(20, 61, 102, 0.2), rgba(20, 61, 102, 0) 50%);
