@@ -3,10 +3,10 @@
     <h2>Harstem</h2>
     <ul class="stats">
       <li>Race: Protoss <img :src="protossIcon" alt="Protoss icon" /></li>
-      <li>MMR: {{ getMetaData().mmr }}</li>
-      <li>Rank: {{ getMetaData().rank }}</li>
-      <li>Wins: {{ getMetaData().wins }}</li>
-      <li>Losses: {{ getMetaData().losses }}</li>
+      <li>MMR: {{ getMetaData.mmr }}</li>
+      <li>Rank: {{ getMetaData.rank }}</li>
+      <li>Wins: {{ getMetaData.wins }}</li>
+      <li>Losses: {{ getMetaData.losses }}</li>
       <li>
         Watch:
         <a
@@ -24,25 +24,31 @@
   </aside>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { mapGetters } from "vuex";
-export default {
+import { IMetaData } from "~/types/interfaces/IMetaData";
+
+export default Vue.extend({
   data() {
     return {
-      latestVideo: "",
+      latestVideo: "" as string,
+      profileData: {} as IMetaData,
       protossIcon: require("~/assets/icons/symbol-protoss.png")
     };
+  },
+  computed: {
+    ...mapGetters("roadRankOne", ["getMetaData"])
   },
   created() {
     this.getLatestVideo();
   },
   methods: {
-    ...mapGetters("roadToRankOne", ["getMetaData"]),
     async getLatestVideo() {
       this.latestVideo = await this.$youtubeService.getLastYoutubeVideoFromPlaylist();
     }
   }
-};
+});
 </script>
 
 <style>

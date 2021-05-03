@@ -10,10 +10,12 @@
   </article>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
+import { mapGetters } from "vuex";
 import { chartOptions } from "./chartOptions";
 
-export default {
+export default Vue.extend({
   data() {
     return {
       chartOptions: chartOptions,
@@ -21,26 +23,12 @@ export default {
     };
   },
   methods: {
-    async getLadderData(firestore) {
-      const snapshot = await firestore.collection("harstemRoadRankOne").get();
-      snapshot.forEach(match => {
-        this.chartOptions.series.data.push(
-          this.translateDataObject(match.data())
-        );
-      });
-      this.loading = false;
-    },
-    translateDataObject(match) {
-      delete Object.assign(match, { ["y"]: match["mmr"] })["mmr"];
-      delete Object.assign(match, { ["x"]: match["date"] })["date"];
-
-      return match;
-    }
+    ...mapGetters("roadRankOne", ["getLadderData"])
   },
   created() {
-    this.getLadderData(this.$fire.firestore);
+    this.chartOptions.series.data = this.getLadderData();
   }
-};
+});
 </script>
 
 <style>

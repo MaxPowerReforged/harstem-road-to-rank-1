@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="wrapper">
     <b-navbar class="navBar" toggleable="lg" type="dark">
-      <b-navbar-brand to="/"
+      <b-navbar-brand
         ><b-img
           class="sc2-logo"
           :src="logoURL"
@@ -19,15 +19,22 @@
             class="nav-link"
             exact-active-class="active-nav-link"
             exact
-            to="/"
+            :to="{ path: '/', query: { id: 2323 } }"
             >Road to Rank I</b-nav-item
           >
           <b-nav-item
             class="nav-link"
             exact-active-class="active-nav-link"
             exact
-            to="/bgwss"
-            >BGWSS</b-nav-item
+            :to="{ path: '/grandmasterTerran', query: { id: 2356 } }"
+            >Grandmaster with Terran</b-nav-item
+          >
+          <b-nav-item
+            class="nav-link"
+            exact-active-class="active-nav-link"
+            exact
+            :to="{ path: '/', query: { id: 2465 } }"
+            >Grandmaster with Zerg</b-nav-item
           >
         </b-navbar-nav>
       </b-collapse>
@@ -63,7 +70,7 @@ function getLogoURL(cloudinary: any) {
 
 <style scoped>
 .navBar {
-  background: rgba(20, 36, 51, 0.8)
+  background: rgba(20, 36, 51, 0.9)
     linear-gradient(0deg, rgba(20, 61, 102, 0.2), rgba(20, 61, 102, 0) 50%);
   border: 2px solid #22476b;
   box-shadow: inset 0 0 20px rgb(102 179 255 / 20%);
@@ -79,5 +86,10 @@ function getLogoURL(cloudinary: any) {
 
 .sc2-logo:hover {
   filter: brightness(1.3);
+}
+
+.wrapper {
+  position: sticky;
+  top: 0;
 }
 </style>

@@ -46,12 +46,14 @@ export const chartOptions = {
       if (thisIndex === 0) previousY = this.y;
       else previousY = this.series.data[thisIndex - 1].y;
       let tooltipHTML = `<span style="color:white">Date:</span> ${formattedDate}`;
-      if (this.point.opponent)
-        tooltipHTML += `<br><span style="color:white">VS:</span> ${
-          this.point.opponent
-        } (${this.point.opponentRace.charAt(0).toUpperCase()}): ${
-          this.point.opponentMmr
-        }`;
+      if (this.point.opponent) {
+        const opponentName = this.point.opponent
+          .replace(/</g, "&lt")
+          .replace(/>/g, "&gt");
+        tooltipHTML += `<br><span style="color:white">VS:</span> ${opponentName} (${this.point.opponentRace
+          .charAt(0)
+          .toUpperCase()}): ${this.point.opponentMmr}`;
+      }
       tooltipHTML += `<br><span style="color:white">Result:</span> ${this.point.decision}`;
       tooltipHTML += `<br><span style="color:white">MMR gain:</span> ${this.y -
         previousY}`;

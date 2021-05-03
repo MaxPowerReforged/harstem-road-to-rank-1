@@ -6,8 +6,8 @@
         `background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImageURL});`
       "
     >
-      <TheNavBar />
-      <Nuxt keep-alive />
+      <TheNavBar class="navBar" />
+      <Nuxt />
     </div>
   </div>
 </template>
@@ -49,5 +49,9 @@ function getBackgroundImageURL(cloudinary: any) {
   background-repeat: no-repeat;
   background-color: #000307;
   background-attachment: fixed;
+}
+
+.navBar {
+  z-index: 200;
 }
 </style>

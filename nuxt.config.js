@@ -48,7 +48,6 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/cloudinary",
     "@nuxtjs/firebase",
-    "nuxt-route-meta",
     "@nuxtjs/svg"
   ],
 

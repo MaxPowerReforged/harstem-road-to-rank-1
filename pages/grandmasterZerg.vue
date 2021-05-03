@@ -6,21 +6,13 @@
   </main>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
+<script>
 import { lateralPageTransition } from "@/utils/transitions";
-import { mapActions } from "vuex";
+import Vue from "vue";
 
-export default Vue.extend({
-  transition: lateralPageTransition,
-  methods: {
-    ...mapActions("roadRankOne", ["fetchMetaData", "fetchLadderData"])
-  },
-  created() {
-    this.fetchLadderData();
-    this.fetchMetaData();
-  }
-});
+export default {
+  transition: lateralPageTransition
+};
 </script>
 
 <style>
