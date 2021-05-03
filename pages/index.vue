@@ -16,11 +16,11 @@ export default {
   },
   transition: lateralPageTransition,
   methods: {
-    ...mapActions("roadToRankOne", ["fetchMetaData", "fetchLadderData"])
+    //...mapActions("roadToRankOne", ["fetchMetaData", "fetchLadderData"])
   },
   created() {
-    this.fetchMetaData();
-    this.fetchLadderData();
+    //this.fetchMetaData();
+    //this.fetchLadderData();
   }
 };
 </script>
