@@ -12,12 +12,24 @@
   </article>
 </template>
 
-<script>
+<script lang="ts">
+import Vue, { PropType } from "vue";
+// @ts-ignore
 import iconProtoss from "~/assets/icons/symbol-protoss.svg?raw";
+// @ts-ignore
 import iconTerran from "~/assets/icons/symbol-terran.svg?raw";
+// @ts-ignore
 import iconZerg from "~/assets/icons/symbol-zerg.svg?raw";
 
-export default {
+export default Vue.extend({
+  props: {
+    seriesName: {
+      type: Object as PropType<
+        "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
+      >,
+      required: true
+    }
+  },
   data() {
     return {
       loading: false,
@@ -36,7 +48,7 @@ export default {
       ]
     };
   }
-};
+});
 </script>
 
 <style>

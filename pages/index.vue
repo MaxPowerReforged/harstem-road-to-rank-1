@@ -1,8 +1,8 @@
 <template>
   <main>
-    <TheProfileCard />
-    <TheMMRLineChart />
-    <LazyTheRaceWinrateChart />
+    <TheProfileCard seriesName="roadRankOne" />
+    <TheMMRLineChart seriesName="roadRankOne" />
+    <LazyTheRaceWinrateChart seriesName="roadRankOne" />
   </main>
 </template>
 

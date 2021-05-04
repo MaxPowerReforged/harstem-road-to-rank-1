@@ -11,11 +11,19 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
 import { mapGetters } from "vuex";
 import { chartOptions } from "./chartOptions";
 
 export default Vue.extend({
+  props: {
+    seriesName: {
+      type: Object as PropType<
+        "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
+      >,
+      required: true
+    }
+  },
   data() {
     return {
       chartOptions: chartOptions,

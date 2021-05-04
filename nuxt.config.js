@@ -26,7 +26,7 @@ export default {
   plugins: [
     "@/plugins/composition-api",
     { src: "~/plugins/highcharts.js" },
-    "~/plugins/youtubeService.js"
+    "~/plugins/youtubeService.ts"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

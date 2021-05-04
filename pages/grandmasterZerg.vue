@@ -1,18 +1,26 @@
 <template>
   <main>
-    <TheProfileCard />
-    <TheMMRLineChart />
-    <LazyTheRaceWinrateChart />
+    <TheProfileCard seriesName="grandmasterZerg" />
+    <TheMMRLineChart seriesName="grandmasterZerg" />
+    <LazyTheRaceWinrateChart seriesName="grandmasterZerg" />
   </main>
 </template>
 
-<script>
-import { lateralPageTransition } from "@/utils/transitions";
+<script lang="ts">
 import Vue from "vue";
+import { lateralPageTransition } from "@/utils/transitions";
+import { mapActions } from "vuex";
 
-export default {
-  transition: lateralPageTransition
-};
+export default Vue.extend({
+  transition: lateralPageTransition,
+  methods: {
+    ...mapActions("grandmasterZerg", ["fetchMetaData", "fetchLadderData"])
+  },
+  created() {
+    this.fetchLadderData();
+    this.fetchMetaData();
+  }
+});
 </script>
 
 <style>

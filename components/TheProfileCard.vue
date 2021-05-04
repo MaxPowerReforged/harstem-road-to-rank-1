@@ -25,20 +25,23 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { mapGetters } from "vuex";
-import { IMetaData } from "~/types/interfaces/IMetaData";
+import Vue, { PropType } from "vue";
+import { mapState, mapGetters } from "vuex";
 
 export default Vue.extend({
+  props: {
+    seriesName: {
+      type: String as PropType<
+        "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
+      >,
+      required: true
+    }
+  },
   data() {
     return {
       latestVideo: "" as string,
-      profileData: {} as IMetaData,
       protossIcon: require("~/assets/icons/symbol-protoss.png")
     };
-  },
-  computed: {
-    ...mapGetters("roadRankOne", ["getMetaData"])
   },
   created() {
     this.getLatestVideo();
@@ -46,6 +49,9 @@ export default Vue.extend({
   methods: {
     async getLatestVideo() {
       this.latestVideo = await this.$youtubeService.getLastYoutubeVideoFromPlaylist();
+    },
+    getMetaData() {
+      return this.$store.getters[`${this.seriesName}/getMetaData`];
     }
   }
 });
