@@ -1,24 +1,34 @@
 <template>
   <main>
     <TheProfileCard seriesName="roadRankOne" />
-    <TheMMRLineChart seriesName="roadRankOne" />
-    <LazyTheRaceWinrateChart seriesName="roadRankOne" />
+    <TheMMRLineChart
+      seriesName="roadRankOne"
+      :loading="getIsLadderDataLoading"
+    />
+    <LazyTheRaceWinrateChart
+      seriesName="roadRankOne"
+      :loading="getIsLadderDataLoading"
+    />
   </main>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { lateralPageTransition } from "@/utils/transitions";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default Vue.extend({
   transition: lateralPageTransition,
   methods: {
-    ...mapActions("roadRankOne", ["fetchMetaData", "fetchLadderData"])
+    ...mapActions("roadRankOne", ["fetchMetaData", "fetchLadderData"]),
+    ...mapGetters("roadToRankOne", ["getLadderData"])
   },
   created() {
     this.fetchLadderData();
     this.fetchMetaData();
+  },
+  computed: {
+    ...mapGetters("roadRankOne", ["getIsLadderDataLoading"])
   }
 });
 </script>

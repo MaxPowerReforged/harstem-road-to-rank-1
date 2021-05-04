@@ -22,12 +22,15 @@ export default Vue.extend({
         "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
       >,
       required: true
+    },
+    loading: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
     return {
-      chartOptions: chartOptions,
-      loading: true
+      chartOptions: chartOptions
     };
   },
   methods: {

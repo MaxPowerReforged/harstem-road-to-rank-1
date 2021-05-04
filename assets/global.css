@@ -79,16 +79,16 @@ li.nav-link {
 }
 
 .slide-right-enter-active {
-  animation: slideInRight 0.5s;
+  animation: slideInRight 0.7s;
 }
 .slide-right-leave-active {
-  animation: slideOutLeft 0.5s;
+  animation: slideOutLeft 0.7s;
 }
 .slide-left-enter-active {
-  animation: slideInLeft 0.5s;
+  animation: slideInLeft 0.7s;
 }
 .slide-left-leave-active {
-  animation: slideOutRight 0.5s;
+  animation: slideOutRight 0.7s;
 }
 
 svg {

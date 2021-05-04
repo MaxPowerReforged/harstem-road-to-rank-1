@@ -5,7 +5,8 @@ import { IMetaData } from "~/types/interfaces/IMetaData";
 
 export const state = () => ({
   metaData: {} as IMetaData,
-  ladderData: [] as IMatchData[]
+  ladderData: [] as IMatchData[],
+  isLadderDataLoading: true as boolean
 });
 
 export type RootState = ReturnType<typeof state>;
@@ -20,6 +21,9 @@ export const getters: GetterTree<RootState, RootState> = {
       delete Object.assign(match, { ["x"]: match["date"] })["date"];
     });
     return tempList as IMatchChart[];
+  },
+  getIsLadderDataLoading: state => {
+    return state.isLadderDataLoading;
   }
 };
 
@@ -29,6 +33,9 @@ export const mutations: MutationTree<RootState> = {
   },
   setLadderData: (state, match: IMatchData) => {
     state.ladderData.push(match);
+  },
+  setIsLadderDataLoading: (state, isLoading: boolean) => {
+    state.isLadderDataLoading = isLoading;
   }
 };
 
@@ -41,6 +48,7 @@ export const actions: ActionTree<RootState, RootState> = {
     commit("setMetaData", JSON.parse(JSON.stringify(metaData.data())));
   },
   async fetchLadderData({ commit }) {
+    commit("setIsLadderDataLoading", true);
     const snapshot = await this.$fire.firestore
       .collection("harstemGrandmasterTerran")
       .get();
@@ -50,5 +58,6 @@ export const actions: ActionTree<RootState, RootState> = {
       delete Object.assign(matchData, { ["x"]: matchData["date"] })["date"];
       commit("setLadderData", JSON.parse(JSON.stringify(matchData)));
     });
+    commit("setIsLadderDataLoading", false);
   }
 };

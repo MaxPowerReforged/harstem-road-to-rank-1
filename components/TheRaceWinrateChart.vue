@@ -1,11 +1,25 @@
 <template>
-  <article class="chart-sheet-winrates">
+  <article
+    class="chart-sheet-winrates"
+    :class="{ 'loading-chart-sheet-winrates': loading }"
+  >
     <h2>Race Winrate</h2>
     <div class="chart-container">
-      <RaceChartCard :chartData="chartData" :icon="iconProtoss" />
-      <RaceChartCard :chartData="chartData" :icon="iconTerran" />
-      <RaceChartCard :chartData="chartData" :icon="iconZerg" />
-      <div class="loading-placeholder" v-if="loading">
+      <RaceChartCard
+        :chartData="chartData"
+        :icon="iconProtoss"
+        v-if="!loading"
+      />
+      <RaceChartCard
+        :chartData="chartData"
+        :icon="iconTerran"
+        v-if="!loading"
+      />
+      <RaceChartCard :chartData="chartData" :icon="iconZerg" v-if="!loading" />
+      <div
+        class="loading-placeholder loading-placeholder-winrate"
+        v-if="loading"
+      >
         <b-spinner class="spinner" label="Loading..."></b-spinner>
       </div>
     </div>
@@ -28,11 +42,14 @@ export default Vue.extend({
         "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
       >,
       required: true
+    },
+    loading: {
+      type: Boolean as PropType<boolean>,
+      required: true
     }
   },
   data() {
     return {
-      loading: false,
       iconProtoss: iconProtoss,
       iconTerran: iconTerran,
       iconZerg: iconZerg,
@@ -68,11 +85,20 @@ export default Vue.extend({
   align-items: center;
 }
 
+.loading-chart-sheet-winrates {
+  height: 258px;
+  width: 555px;
+}
+
 .chart-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.loading-placeholder-winrate {
+  margin-top: 150px;
 }
 </style>
