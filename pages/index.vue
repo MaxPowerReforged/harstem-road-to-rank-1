@@ -9,6 +9,10 @@
       seriesName="roadRankOne"
       :loading="getIsLadderDataLoading"
     />
+    <LazyTheMapBarChart
+      seriesName="roadRankOne"
+      :loading="getIsLadderDataLoading"
+    />
   </main>
 </template>
 
