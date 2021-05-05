@@ -1,5 +1,6 @@
 export const mapChartOptions = {
   chart: {
+    context: null,
     type: "column",
     backgroundColor: "transparent",
     width: 800,
@@ -67,9 +68,7 @@ export const mapChartOptions = {
     labels: {
       useHTML: true,
       formatter: function() {
-        const label =
-          '<img src="' + this.value + '" style="width: 50px; height: 50px;">';
-        return "<p>testing</p>";
+        return this.value.toString();
       }
     },
     lineColor: "#22476b",
@@ -96,64 +95,7 @@ export const mapChartOptions = {
   },
   series: [
     {
-      data: [
-        {
-          y: 18,
-          color: "white",
-          borderColor: "white",
-          name: "Iron Hills",
-          faction: "ironHills",
-          wins: 12,
-          loses: 4, //TODO is not loses, it is total
-          total: 7,
-          map: "romanticide"
-        },
-        {
-          y: 45,
-          color: "white",
-          borderColor: "white",
-          name: "Gondor",
-          faction: "gondor",
-          wins: 3,
-          loses: 4,
-          total: 7,
-          map: "oxide"
-        },
-        {
-          y: 67,
-          color: "white",
-          name: "Lothlorien",
-          faction: "lothlorien",
-          color: "white",
-          borderColor: "white",
-          wins: 3,
-          loses: 4,
-          total: 7,
-          map: "jagannatha"
-        },
-        {
-          y: 35,
-          color: "white",
-          borderColor: "white",
-          name: "Angmar",
-          faction: "angmar",
-          wins: 3,
-          loses: 4,
-          total: 7,
-          map: "lightshade"
-        },
-        {
-          y: 53,
-          color: "white",
-          borderColor: "white",
-          name: "Mordor",
-          faction: "mordor",
-          wins: 4,
-          loses: 4,
-          total: 8,
-          map: "blackburn"
-        }
-      ]
+      data: []
     }
   ],
   credits: {

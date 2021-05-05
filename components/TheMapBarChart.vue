@@ -31,86 +31,68 @@ export default Vue.extend({
   data() {
     return {
       chartOptions: mapChartOptions,
-      romanticide: "",
-      oxide: "",
-      lightshade: "",
-      jagannatha: "",
-      blackburn: "",
-      beckettIndustries: "",
-      atmospheres: ""
+      maps: [],
+      chartData: [
+        {
+          y: 18,
+          color: "white",
+          borderColor: "white",
+          name: "Iron Hills",
+          faction: "ironHills",
+          wins: 12,
+          loses: 4, //TODO is not loses, it is total
+          total: 7
+        },
+        {
+          y: 45,
+          color: "white",
+          borderColor: "white",
+          name: "Gondor",
+          faction: "gondor",
+          wins: 3,
+          loses: 4,
+          total: 7
+        },
+        {
+          y: 67,
+          color: "white",
+          name: "Lothlorien",
+          faction: "lothlorien",
+          borderColor: "white",
+          wins: 3,
+          loses: 4,
+          total: 7
+        },
+        {
+          y: 35,
+          color: "white",
+          borderColor: "white",
+          name: "Angmar",
+          faction: "angmar",
+          wins: 3,
+          loses: 4,
+          total: 7
+        },
+        {
+          y: 53,
+          color: "white",
+          borderColor: "white",
+          name: "Mordor",
+          faction: "mordor",
+          wins: 4,
+          loses: 4,
+          total: 8
+        }
+      ]
     };
   },
   methods: {
     ...mapGetters("roadRankOne", ["getLadderData"])
   },
   created() {
-    //this.chartOptions.series.data = this.getLadderData();
+    this.chartOptions.series[0].data = this.chartData as any;
   },
-  async fetch() {
-    this.romanticide = await this.$cloudinary.image.url(
-      "Harstem-Stats-Road-To-Rank-1/maps/romanticide.jpg",
-      {
-        fetch_format: "auto",
-        crop: "scale",
-        quality: "auto",
-        width: "auto"
-      }
-    );
-    this.oxide = await this.$cloudinary.image.url(
-      "Harstem-Stats-Road-To-Rank-1/maps/oxide.jpg",
-      {
-        fetch_format: "auto",
-        crop: "scale",
-        quality: "auto",
-        width: "auto"
-      }
-    );
-    this.lightshade = await this.$cloudinary.image.url(
-      "Harstem-Stats-Road-To-Rank-1/maps/lightshade.jpg",
-      {
-        fetch_format: "auto",
-        crop: "scale",
-        quality: "auto",
-        width: "auto"
-      }
-    );
-    this.jagannatha = await this.$cloudinary.image.url(
-      "Harstem-Stats-Road-To-Rank-1/maps/jagannatha.jpg",
-      {
-        fetch_format: "auto",
-        crop: "scale",
-        quality: "auto",
-        width: "auto"
-      }
-    );
-    this.blackburn = await this.$cloudinary.image.url(
-      "Harstem-Stats-Road-To-Rank-1/maps/blackburn.jpg",
-      {
-        fetch_format: "auto",
-        crop: "scale",
-        quality: "auto",
-        width: "auto"
-      }
-    );
-    this.beckettIndustries = await this.$cloudinary.image.url(
-      "Harstem-Stats-Road-To-Rank-1/maps/beckettIndustries.jpg",
-      {
-        fetch_format: "auto",
-        crop: "scale",
-        quality: "auto",
-        width: "auto"
-      }
-    );
-    this.atmospheres = await this.$cloudinary.image.url(
-      "Harstem-Stats-Road-To-Rank-1/maps/atmospheres.jpg",
-      {
-        fetch_format: "auto",
-        crop: "scale",
-        quality: "auto",
-        width: "auto"
-      }
-    );
-  }
+  async fetch() {}
 });
 </script>
 
