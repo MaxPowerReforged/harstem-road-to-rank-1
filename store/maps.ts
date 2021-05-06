@@ -29,7 +29,7 @@ export const actions: ActionTree<RootState, RootState> = {
     ];
     let maps: object[];
     mapNames.forEach(mapName => {
-      const mapUrl = await this.$cloudinary.image.url();
+      //const mapUrl = await this.$cloudinary.image.url();
     });
   }
 };

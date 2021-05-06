@@ -31,6 +31,9 @@ export const mutations: MutationTree<RootState> = {
   setMetaData: (state, metaData: IMetaData) => {
     state.metaData = metaData;
   },
+  emptyLadderData: state => {
+    state.ladderData = [];
+  },
   setLadderData: (state, match: IMatchData) => {
     state.ladderData.push(match);
   },
@@ -48,6 +51,7 @@ export const actions: ActionTree<RootState, RootState> = {
     commit("setMetaData", JSON.parse(JSON.stringify(metaData.data())));
   },
   async fetchLadderData({ commit }) {
+    commit("emptyLadderData");
     commit("setIsLadderDataLoading", true);
     const snapshot = await this.$fire.firestore
       .collection("harstemRoadRankOne")

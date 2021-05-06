@@ -89,7 +89,14 @@ export const chartOptions = {
     tickColor: "#22476b",
     scrollbar: {
       enabled: true
-    }
+    },
+    breaks: [
+      {
+        from: 1619447908,
+        to: 1619848868,
+        gapSize: 400000
+      }
+    ]
   },
   yAxis: {
     labels: {
