@@ -29,12 +29,14 @@ export const mapChartOptions = {
         offsetX: 0,
         offsetY: 0
       },
-      pointWidth: 10,
-      borderWidth: 3,
+      pointWidth: 3,
+      borderColor: "#A3C5E1",
+      borderWidth: 0,
       dataLabels: {
         enabled: true,
         format: "<span>{point.y}</span>",
         style: {
+          color: "white",
           textOutline: "none",
           fontWeight: "regular"
         }
@@ -65,14 +67,14 @@ export const mapChartOptions = {
     }
   },
   xAxis: {
-    labels: {
-      useHTML: true,
-      formatter: function() {
-        return this.value.toString();
-      }
-    },
+    categories: [],
     lineColor: "#22476b",
     tickColor: "#22476b",
+    labels: {
+      style: {
+        color: "white"
+      }
+    },
     scrollbar: {
       enabled: true
     }

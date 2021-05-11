@@ -2,7 +2,7 @@
   <article class="chart-sheet-maps">
     <h2>Winrate by Map</h2>
     <div class="chart-wrapper-maps">
-      <highcharts :options="chartOptions"></highcharts>
+      <highcharts v-if="!loading" :options="chartOptions"></highcharts>
     </div>
     <div class="loading-placeholder" v-if="loading">
       <b-spinner class="spinner" label="Loading..."></b-spinner>
@@ -35,8 +35,6 @@ export default Vue.extend({
       chartData: [
         {
           y: 18,
-          color: "white",
-          borderColor: "white",
           name: "Iron Hills",
           faction: "ironHills",
           wins: 12,
@@ -45,8 +43,6 @@ export default Vue.extend({
         },
         {
           y: 45,
-          color: "white",
-          borderColor: "white",
           name: "Gondor",
           faction: "gondor",
           wins: 3,
@@ -55,18 +51,14 @@ export default Vue.extend({
         },
         {
           y: 67,
-          color: "white",
           name: "Lothlorien",
           faction: "lothlorien",
-          borderColor: "white",
           wins: 3,
           loses: 4,
           total: 7
         },
         {
           y: 35,
-          color: "white",
-          borderColor: "white",
           name: "Angmar",
           faction: "angmar",
           wins: 3,
@@ -75,8 +67,6 @@ export default Vue.extend({
         },
         {
           y: 53,
-          color: "white",
-          borderColor: "white",
           name: "Mordor",
           faction: "mordor",
           wins: 4,
@@ -87,10 +77,12 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...mapGetters("roadRankOne", ["getLadderData"])
+    ...mapGetters("roadRankOne", ["getLadderData"]),
+    ...mapGetters("maps", ["getMaps"])
   },
   created() {
     this.chartOptions.series[0].data = this.chartData as any;
+    this.chartOptions.xAxis.categories = this.getMaps();
   },
   async fetch() {}
 });

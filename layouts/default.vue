@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, useContext } from "@nuxtjs/composition-api";
+import { mapActions } from "vuex";
 
 export default defineComponent({
   setup() {
@@ -24,6 +25,12 @@ export default defineComponent({
     return {
       backgroundImageURL
     };
+  },
+  methods: {
+    ...mapActions("maps", ["fetchMaps"])
+  },
+  created() {
+    this.fetchMaps();
   }
 });
 

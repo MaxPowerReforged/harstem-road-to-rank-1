@@ -1,3 +1,5 @@
+import util from "util";
+
 export const chartOptions = {
   title: false,
   chart: {
@@ -40,7 +42,7 @@ export const chartOptions = {
     useHTML: true,
     headerFormat: "",
     formatter: function() {
-      const formattedDate = new Date(this.x * 1000).toLocaleString();
+      const formattedDate = new Date(this.date * 1000).toLocaleString();
       const thisIndex = this.series.data.indexOf(this.point);
       let previousY = 0;
       if (thisIndex === 0) previousY = this.y;
@@ -79,7 +81,11 @@ export const chartOptions = {
     labels: {
       useHTML: true,
       formatter: function() {
-        return new Date(this.value * 1000).toLocaleDateString();
+        const index = this.value;
+        console.log(
+          util.inspect(this.axis.chart, { showHidden: false, depth: 2 })
+        );
+        return new Date(this.value).toLocaleDateString();
       },
       style: {
         color: "white"
@@ -89,14 +95,7 @@ export const chartOptions = {
     tickColor: "#22476b",
     scrollbar: {
       enabled: true
-    },
-    breaks: [
-      {
-        from: 1619447908,
-        to: 1619848868,
-        gapSize: 400000
-      }
-    ]
+    }
   },
   yAxis: {
     labels: {

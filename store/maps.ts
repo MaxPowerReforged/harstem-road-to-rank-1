@@ -1,17 +1,17 @@
 import { GetterTree, ActionTree, MutationTree } from "vuex";
 
 export const state = () => ({
-  maps: [] as object[]
+  maps: [] as string[]
 });
 
 export type RootState = ReturnType<typeof state>;
 
 export const getters: GetterTree<RootState, RootState> = {
-  getmaps: state => state.maps
+  getMaps: state => state.maps
 };
 
 export const mutations: MutationTree<RootState> = {
-  setmaps: (state, maps: object[]) => {
+  setMaps: (state, maps: string[]) => {
     state.maps = maps;
   }
 };
@@ -19,17 +19,19 @@ export const mutations: MutationTree<RootState> = {
 export const actions: ActionTree<RootState, RootState> = {
   async fetchMaps({ commit }) {
     const mapNames = [
-      "romanticide",
-      "oxide",
-      "lightshade",
-      "jagannatha",
-      "blackburn",
-      "beckettIndustries",
-      "atmospheres"
+      "Romanticide",
+      "Oxide",
+      "Lightshade",
+      "Jagannatha",
+      "Blackburn",
+      "BeckettIndustries",
+      "Atmospheres"
     ];
-    let maps: object[];
+    let maps: string[] = [];
     mapNames.forEach(mapName => {
+      maps.push(mapName);
       //const mapUrl = await this.$cloudinary.image.url();
     });
+    commit("setMaps", maps);
   }
 };

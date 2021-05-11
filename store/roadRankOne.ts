@@ -16,10 +16,6 @@ export const getters: GetterTree<RootState, RootState> = {
   getLadderData: state => state.ladderData,
   getChartLadderData: state => {
     const tempList = state.ladderData;
-    tempList.forEach(match => {
-      delete Object.assign(match, { ["y"]: match["mmr"] })["mmr"];
-      delete Object.assign(match, { ["x"]: match["date"] })["date"];
-    });
     return tempList as IMatchChart[];
   },
   getIsLadderDataLoading: state => {
@@ -59,7 +55,6 @@ export const actions: ActionTree<RootState, RootState> = {
     snapshot.forEach(match => {
       const matchData = match.data();
       delete Object.assign(matchData, { ["y"]: matchData["mmr"] })["mmr"];
-      delete Object.assign(matchData, { ["x"]: matchData["date"] })["date"];
       commit("setLadderData", JSON.parse(JSON.stringify(matchData)));
     });
     commit("setIsLadderDataLoading", false);
