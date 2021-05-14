@@ -18,7 +18,7 @@ import { mapChartOptions } from "./mapChartOptions";
 export default Vue.extend({
   props: {
     seriesName: {
-      type: Object as PropType<
+      type: String as PropType<
         "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
       >,
       required: true

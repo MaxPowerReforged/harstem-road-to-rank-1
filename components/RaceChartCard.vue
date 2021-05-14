@@ -8,16 +8,23 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue, { PropType } from "vue";
 import { raceChartOptions } from "./raceChartOptions";
 
-export default {
+export default Vue.extend({
   data() {
     return {
       chartOptions: raceChartOptions
     };
   },
   props: {
+    seriesName: {
+      type: String as PropType<
+        "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
+      >,
+      required: true
+    },
     chartData: {
       type: Array,
       required: true
@@ -27,17 +34,10 @@ export default {
       required: true
     }
   },
-  //   computed: {
-  //     iconClass() {
-  //       if (this.chartData.faction === "protoss") return "icon-protoss";
-  //       if (this.chartData.faction === "terran") return "icon-terran";
-  //       if (this.chartData.faction === "zerg") return "icon-zerg";
-  //     }
-  //   },
   mounted() {
     this.chartOptions.series.data = this.chartData;
   }
-};
+});
 </script>
 
 <style>
