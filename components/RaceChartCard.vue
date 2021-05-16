@@ -4,20 +4,20 @@
       <div class="race-icon-chart" :class="iconClass" v-html="icon"></div>
       <highcharts :options="chartOptions"></highcharts>
     </div>
-    <span>PvP: 3/4<br />80%</span>
+    <span
+      >{{ raceFromSeries }}v{{ race.charAt(0).toUpperCase() }}:
+      {{ winrateData.wins }}/{{ winrateData.losses }}<br />{{
+        winratePercentage
+      }}%</span
+    >
   </div>
 </template>
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { raceChartOptions } from "./raceChartOptions";
+import { IRaceWinrate } from "~/types/interfaces/IRaceWinrate";
 
 export default Vue.extend({
-  data() {
-    return {
-      chartOptions: raceChartOptions
-    };
-  },
   props: {
     seriesName: {
       type: String as PropType<
@@ -25,17 +25,106 @@ export default Vue.extend({
       >,
       required: true
     },
-    chartData: {
-      type: Array,
+    winrateData: {
+      type: Object as PropType<IRaceWinrate>,
       required: true
     },
     icon: {
       type: String,
       required: true
+    },
+    race: {
+      type: String,
+      required: true
     }
   },
-  mounted() {
-    this.chartOptions.series.data = this.chartData;
+  data() {
+    return {
+      chartPoints: []
+    };
+  },
+  computed: {
+    iconClass() {
+      if (this.race === "protoss") return "icon-protoss";
+      if (this.race === "terran") return "icon-terran";
+      if (this.race === "zerg") return "icon-zerg";
+    },
+    factionColor() {
+      if (this.race === "protoss") return "#dec93e";
+      if (this.race === "terran") return "#799fca";
+      if (this.race === "zerg") return "#9e1b51";
+    },
+    factionShadowColor() {
+      if (this.race === "protoss") return "#c4ad18";
+      if (this.race === "terran") return "#5887bd";
+      if (this.race === "zerg") return "#681236";
+    },
+    raceFromSeries() {
+      if (this.seriesName === "roadRankOne") return "P";
+      if (this.seriesName === "grandmasterTerran") return "T";
+      if (this.seriesName === "grandmasterZerg") return "Z";
+    },
+    winratePercentage() {
+      if (this.winrateData.wins === 0 && this.winrateData.losses === 0)
+        return 0;
+      return (
+        (this.winrateData.wins /
+          (this.winrateData.wins + this.winrateData.losses)) *
+        100
+      ).toFixed(0);
+    },
+    chartOptions() {
+      return {
+        chart: {
+          type: "pie",
+          backgroundColor: "transparent",
+          width: 185,
+          height: 150
+        },
+        plotOptions: {
+          pie: {
+            borderColor: "black",
+            dataLabels: false,
+            borderWidth: 0,
+            allowPointSelect: false,
+            animation: true,
+            innerSize: "93%",
+            size: 80
+          },
+          series: {
+            enableMouseTracking: false,
+            shadow: {
+              color: this.factionShadowColor,
+              width: 9,
+              offsetX: 0,
+              offsetY: 0
+            }
+          }
+        },
+        tooltip: {
+          enabled: false
+        },
+        title: {
+          text: ""
+        },
+        series: [{ data: this.chartPoints }],
+        credits: {
+          enabled: false
+        }
+      };
+    }
+  },
+  created() {
+    this.chartPoints = [
+      {
+        y: this.winrateData.wins,
+        color: this.factionColor
+      },
+      {
+        y: this.winrateData.losses,
+        color: "black"
+      }
+    ];
   }
 });
 </script>
@@ -67,7 +156,7 @@ export default Vue.extend({
 }
 
 .icon-protoss {
-  filter: drop-shadow(0 0 15px #dec93e);
+  filter: drop-shadow(0 0 15px #c4ad18);
 }
 
 .icon-zerg {
@@ -79,7 +168,7 @@ export default Vue.extend({
 }
 
 .icon-terran {
-  color: #5887bd;
+  color: #799fca;
 }
 
 .icon-terran {

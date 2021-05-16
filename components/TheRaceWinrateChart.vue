@@ -5,17 +5,13 @@
   >
     <h2>Race Winrate</h2>
     <div class="chart-container">
-      <RaceChartCard
-        :chartData="chartData"
-        :icon="iconProtoss"
-        v-if="!loading"
-      />
-      <RaceChartCard
-        :chartData="chartData"
-        :icon="iconTerran"
-        v-if="!loading"
-      />
-      <RaceChartCard :chartData="chartData" :icon="iconZerg" v-if="!loading" />
+      <RaceChartCard seriesName: seriesName
+      :winrateData="getWinratePerFaction.protoss" :icon="iconProtoss"
+      v-if="!loading" race="protoss" /> <RaceChartCard seriesName: seriesName
+      :winrateData="getWinratePerFaction.terran" :icon="iconTerran"
+      v-if="!loading" race="terran" /> <RaceChartCard seriesName: seriesName
+      :winrateData="getWinratePerFaction.zerg" :icon="iconZerg" v-if="!loading"
+      race="zerg" />
       <div
         class="loading-placeholder loading-placeholder-winrate"
         v-if="loading"
@@ -28,17 +24,19 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import { mapGetters } from "vuex";
 // @ts-ignore
 import iconProtoss from "~/assets/icons/symbol-protoss.svg?raw";
 // @ts-ignore
 import iconTerran from "~/assets/icons/symbol-terran.svg?raw";
 // @ts-ignore
 import iconZerg from "~/assets/icons/symbol-zerg.svg?raw";
+import { IRaceWinrate } from "~/types/interfaces/IRaceWinrate";
 
 export default Vue.extend({
   props: {
     seriesName: {
-      type: Object as PropType<
+      type: String as PropType<
         "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
       >,
       required: true
@@ -52,18 +50,11 @@ export default Vue.extend({
     return {
       iconProtoss: iconProtoss,
       iconTerran: iconTerran,
-      iconZerg: iconZerg,
-      chartData: [
-        {
-          y: 2,
-          color: "#A3C5E1"
-        },
-        {
-          y: 5,
-          color: "black"
-        }
-      ]
+      iconZerg: iconZerg
     };
+  },
+  computed: {
+    ...mapGetters("roadRankOne", ["getWinratePerFaction"])
   }
 });
 </script>

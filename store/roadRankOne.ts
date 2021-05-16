@@ -2,6 +2,7 @@ import { GetterTree, ActionTree, MutationTree } from "vuex";
 import { IMatchChart } from "~/types/interfaces/IMatchChart";
 import { IMatchData } from "~/types/interfaces/IMatchData";
 import { IMetaData } from "~/types/interfaces/IMetaData";
+import { IRaceWinrate } from "~/types/interfaces/IRaceWinrate";
 
 export const state = () => ({
   metaData: {} as IMetaData,
@@ -18,6 +19,44 @@ export const getters: GetterTree<RootState, RootState> = {
     const tempList = state.ladderData;
     return tempList as IMatchChart[];
   },
+  getWinratePerFaction: state => {
+    let protossWinrate: IRaceWinrate = {
+      faction: "protoss",
+      wins: 0,
+      losses: 0
+    };
+    let zergWinrate: IRaceWinrate = {
+      faction: "zerg",
+      wins: 0,
+      losses: 0
+    };
+    let terranWinrate: IRaceWinrate = {
+      faction: "terran",
+      wins: 0,
+      losses: 0
+    };
+    state.ladderData.forEach(match => {
+      if (match.opponentRace === "protoss") {
+        if (match.decision === "Win") protossWinrate.wins += 1;
+        else protossWinrate.losses += 1;
+      }
+      if (match.opponentRace === "terran") {
+        if (match.decision === "Win") terranWinrate.wins += 1;
+        else terranWinrate.losses += 1;
+      }
+      if (match.opponentRace === "zerg") {
+        if (match.decision === "Win") zergWinrate.wins += 1;
+        else zergWinrate.losses += 1;
+      }
+    });
+    const winrates = {
+      protoss: protossWinrate,
+      terran: terranWinrate,
+      zerg: zergWinrate
+    };
+    return winrates;
+  },
+  getWinratePerMap: state => {},
   getIsLadderDataLoading: state => {
     return state.isLadderDataLoading;
   }
