@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import { IMapWinrate } from "@/types/interfaces/IMapWinrate";
 import { mapGetters } from "vuex";
 import { mapChartOptions } from "./mapChartOptions";
 
@@ -32,59 +33,42 @@ export default Vue.extend({
     return {
       chartOptions: mapChartOptions,
       maps: [],
-      chartData: [
-        {
-          y: 18,
-          name: "Iron Hills",
-          faction: "ironHills",
-          wins: 12,
-          loses: 4, //TODO is not loses, it is total
-          total: 7
-        },
-        {
-          y: 45,
-          name: "Gondor",
-          faction: "gondor",
-          wins: 3,
-          loses: 4,
-          total: 7
-        },
-        {
-          y: 67,
-          name: "Lothlorien",
-          faction: "lothlorien",
-          wins: 3,
-          loses: 4,
-          total: 7
-        },
-        {
-          y: 35,
-          name: "Angmar",
-          faction: "angmar",
-          wins: 3,
-          loses: 4,
-          total: 7
-        },
-        {
-          y: 53,
-          name: "Mordor",
-          faction: "mordor",
-          wins: 4,
-          loses: 4,
-          total: 8
-        }
-      ]
+      chartData: []
     };
   },
-  methods: {
-    ...mapGetters("roadRankOne", ["getLadderData"]),
-    ...mapGetters("maps", ["getMaps"])
+  computed: {
+    ...mapGetters("roadRankOne", ["getWinratePerMap"])
   },
   created() {
-    this.chartOptions.series[0].data = this.chartData as any;
-    this.chartOptions.xAxis.categories = this.getMaps();
+    this.chartOptions.series[0].data = this.processWinrateForChart(
+      this.getWinratePerMap as any
+    );
   },
-  async fetch() {}
+  methods: {
+    processWinrateForChart(mapWinrates: IMapWinrate[]): any {
+      let processedWinrates = [] as any[];
+      mapWinrates.forEach(mapWinrate => {
+        let percentage = 0;
+        if (mapWinrate.wins === 0 && mapWinrate.losses === 0) percentage = 0;
+        else {
+          percentage = parseFloat(
+            (
+              (mapWinrate.wins / (mapWinrate.wins + mapWinrate.losses)) *
+              100
+            ).toFixed(0)
+          );
+        }
+        processedWinrates.push({
+          name: mapWinrate.map,
+          wins: mapWinrate.wins,
+          losses: mapWinrate.losses,
+          y: percentage
+        });
+      });
+      console.log(processedWinrates);
+      return processedWinrates as any[];
+    }
+  }
 });
 </script>
 

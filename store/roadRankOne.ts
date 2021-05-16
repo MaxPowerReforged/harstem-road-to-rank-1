@@ -4,6 +4,10 @@ import { IMatchData } from "~/types/interfaces/IMatchData";
 import { IMetaData } from "~/types/interfaces/IMetaData";
 import { IRaceWinrate } from "~/types/interfaces/IRaceWinrate";
 
+interface looseObject {
+  [key: string]: any;
+}
+
 export const state = () => ({
   metaData: {} as IMetaData,
   ladderData: [] as IMatchData[],
@@ -56,7 +60,30 @@ export const getters: GetterTree<RootState, RootState> = {
     };
     return winrates;
   },
-  getWinratePerMap: state => {},
+  getWinratePerMap: state => {
+    console.log(state.ladderData);
+    const mapNames = [
+      ...new Set(
+        state.ladderData.map(match => {
+          match.map;
+        })
+      )
+    ];
+    console.log(mapNames);
+    let mapWinrates: looseObject = {};
+    mapNames.forEach(mapName => {
+      mapWinrates[mapName] = {
+        name: mapName,
+        wins: 0,
+        losses: 0
+      };
+    });
+    state.ladderData.forEach(match => {
+      if (match.decision === "Win") mapWinrates[match.map].wins += 1;
+      if (match.decision === "Lose") mapWinrates[match.map].loses += 1;
+    });
+    return Object.values(mapWinrates);
+  },
   getIsLadderDataLoading: state => {
     return state.isLadderDataLoading;
   }

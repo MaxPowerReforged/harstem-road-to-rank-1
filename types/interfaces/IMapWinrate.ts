@@ -1,5 +1,5 @@
 export interface IRaceWinrate {
-  map: "protoss" | "zerg" | "terran";
+  map: string;
   wins: number;
   losses: number;
 }
