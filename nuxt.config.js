@@ -37,7 +37,8 @@ export default {
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     "@nuxtjs/composition-api/module",
-    "@nuxtjs/google-fonts"
+    "@nuxtjs/google-fonts",
+    '@nuxtjs/google-analytics'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -84,6 +85,13 @@ export default {
     services: {
       database: true,
       firestore: true
+    }
+  },
+
+  googleAnalytics: {
+    id: 'UA-196512526-1',
+    autoTracking: {
+      screenview: true
     }
   }
 };
