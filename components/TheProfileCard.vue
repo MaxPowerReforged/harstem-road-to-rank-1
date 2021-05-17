@@ -2,7 +2,7 @@
   <aside class="profile-sheet">
     <h2>Harstem</h2>
     <ul class="stats">
-      <li>Race: Protoss <img :src="protossIcon" alt="Protoss icon" /></li>
+      <li>Race: {{ race }} <img :src="icon" :alt="race + ' icon'" /></li>
       <li>MMR: {{ getMetaData.mmr }}</li>
       <li>Rank: {{ getMetaData.rank }}</li>
       <li>Wins: {{ getMetaData.wins }}</li>
@@ -11,7 +11,7 @@
         Watch:
         <a
           target="_blank"
-          href="https://youtube.com/playlist?list=PLbVNzAA7sXzDbrxTpRDs-cF05yJgW0NRC"
+          :href="playlistLink"
           >YT playlist</a
         >
       </li>
@@ -40,8 +40,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      latestVideo: "" as string,
-      protossIcon: require("~/assets/icons/symbol-protoss.png")
+      latestVideo: "" as string
     };
   },
   created() {
@@ -50,6 +49,19 @@ export default Vue.extend({
   computed: {
     getMetaData() {
       return this.$store.getters[`${this.seriesName}/getMetaData`];
+    },
+    race() {
+      if(this.seriesName === "roadRankOne") return "Protoss";
+      if(this.seriesName === "grandmasterTerran") return "Terran";
+      if(this.seriesName === "grandmasterZerg") return "Zerg";
+    },
+    icon() {
+      return require(`~/assets/icons/symbol-${this.race.toLowerCase()}.png`)
+    },
+    playlistLink() {
+      if(this.seriesName === "roadRankOne") return "https://youtube.com/playlist?list=PLbVNzAA7sXzDbrxTpRDs-cF05yJgW0NRC";
+      if(this.seriesName === "grandmasterTerran") return "https://youtube.com/playlist?list=PLbVNzAA7sXzC2KdK1CkJcBmPW2BH09FTj";
+      if(this.seriesName === "grandmasterZerg") return "https://youtube.com/playlist?list=PLbVNzAA7sXzB0KxW1HaroKhN1ziHQQr58";
     }
   },
   methods: {
