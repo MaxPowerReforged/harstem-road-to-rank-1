@@ -14,6 +14,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import Vue, { PropType } from "vue";
 import { IRaceWinrate } from "~/types/interfaces/IRaceWinrate";
 

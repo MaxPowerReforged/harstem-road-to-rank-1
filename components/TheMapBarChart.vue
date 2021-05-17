@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import Vue, { PropType } from "vue";
 import { IMapWinrate } from "@/types/interfaces/IMapWinrate";
-import { mapGetters } from "vuex";
 
 export default Vue.extend({
   props: {

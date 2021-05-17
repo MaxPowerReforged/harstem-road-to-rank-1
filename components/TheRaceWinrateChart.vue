@@ -23,6 +23,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import Vue, { PropType } from "vue";
 import { mapGetters } from "vuex";
 // @ts-ignore
