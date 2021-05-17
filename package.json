@@ -15,6 +15,7 @@
     "@nuxtjs/cloudinary": "^1.0.3-beta-4",
     "@nuxtjs/composition-api": "^0.23.2",
     "@nuxtjs/firebase": "^7.5.0",
+    "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/svg": "^0.1.12",
     "@vue/composition-api": "^1.0.0-rc.7",
     "animate.css": "^4.1.1",

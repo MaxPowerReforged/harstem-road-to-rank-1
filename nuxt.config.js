@@ -38,7 +38,6 @@ export default {
     "@nuxt/typescript-build",
     "@nuxtjs/composition-api/module",
     "@nuxtjs/google-fonts",
-    '@nuxtjs/google-analytics'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -49,7 +48,8 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/cloudinary",
     "@nuxtjs/firebase",
-    "@nuxtjs/svg"
+    "@nuxtjs/svg",
+    '@nuxtjs/google-gtag'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -88,10 +88,7 @@ export default {
     }
   },
 
-  googleAnalytics: {
+  'google-gtag': {
     id: 'UA-196512526-1',
-    autoTracking: {
-      screenview: true
-    }
   }
 };
