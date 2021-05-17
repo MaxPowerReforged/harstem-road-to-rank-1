@@ -2,7 +2,9 @@
   <article class="chart-sheet">
     <h2>Ladder MMR</h2>
     <div class="chart-wrapper">
-      <highcharts :options="chartOptions"></highcharts>
+      <client-only>
+        <highcharts :options="chartOptions"></highcharts>
+      </client-only>
     </div>
     <div class="loading-placeholder" v-if="loading">
       <b-spinner class="spinner" label="Loading..."></b-spinner>

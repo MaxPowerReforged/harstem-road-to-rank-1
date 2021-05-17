@@ -28,11 +28,6 @@ export default Vue.extend({
       required: true
     }
   },
-  data() {
-    return {
-      chartData: []
-    };
-  },
   computed: {
     getWinratePerMap() {
       return this.$store.getters[this.seriesName + "/getWinratePerMap"];

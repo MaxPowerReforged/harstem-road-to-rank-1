@@ -19,7 +19,6 @@ export class YoutubeService {
   ) {
     // @ts-ignore
     const playlistId: string = this[playlistName + "PlaylistId"];
-    console.log(playlistId);
     const result = await this.initialCall(playlistId);
     if (result.nextPageToken === undefined)
       return this.getLatestItemFromResult(result.items);
