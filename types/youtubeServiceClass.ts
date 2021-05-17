@@ -3,6 +3,8 @@ import { NuxtAxiosInstance } from "@nuxtjs/axios";
 export class YoutubeService {
   axios: NuxtAxiosInstance;
   roadRankOnePlaylistId: string = "PLbVNzAA7sXzDbrxTpRDs-cF05yJgW0NRC";
+  grandmasterTerranPlaylistId: string = "PLbVNzAA7sXzC2KdK1CkJcBmPW2BH09FTj";
+  grandmasterZergPlaylistId: string = "PLbVNzAA7sXzB0KxW1HaroKhN1ziHQQr58";
   resultsPerPage: number = 50;
   apiKey: string = "AIzaSyB4yQuwLMDsMwHBGsI5BqFiI8xQ2s-M41U";
   harstemChannelId: string = "UCCRdB9rqzP2m7bPYb5drH_Q";
@@ -13,8 +15,11 @@ export class YoutubeService {
   }
 
   async getLastYoutubeVideoFromPlaylist(
-    playlistId: string = this.roadRankOnePlaylistId
+    playlistName: "roadRankOne" | "grandmasterTerran" | "grandmasterZerg"
   ) {
+    // @ts-ignore
+    const playlistId: string = this[playlistName + "PlaylistId"];
+    console.log(playlistId);
     const result = await this.initialCall(playlistId);
     if (result.nextPageToken === undefined)
       return this.getLatestItemFromResult(result.items);
@@ -27,7 +32,7 @@ export class YoutubeService {
     }
   }
 
-  async initialCall(playlistId: string = this.roadRankOnePlaylistId) {
+  async initialCall(playlistId: string) {
     const response = await this.axios.$get(
       "https://www.googleapis.com/youtube/v3/playlistItems",
       {
@@ -47,10 +52,7 @@ export class YoutubeService {
     return result;
   }
 
-  async followingCalls(
-    nextPageToken: string,
-    playlistId: string = this.roadRankOnePlaylistId
-  ) {
+  async followingCalls(nextPageToken: string, playlistId: string) {
     const response = await this.axios.$get(
       "https://www.googleapis.com/youtube/v3/playlistItems",
       {

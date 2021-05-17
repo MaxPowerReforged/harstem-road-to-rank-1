@@ -46,12 +46,16 @@ export default Vue.extend({
   created() {
     this.getLatestVideo();
   },
-  methods: {
-    async getLatestVideo() {
-      this.latestVideo = await this.$youtubeService.getLastYoutubeVideoFromPlaylist();
-    },
+  computed: {
     getMetaData() {
       return this.$store.getters[`${this.seriesName}/getMetaData`];
+    }
+  },
+  methods: {
+    async getLatestVideo() {
+      this.latestVideo = await this.$youtubeService.getLastYoutubeVideoFromPlaylist(
+        this.seriesName
+      );
     }
   }
 });
