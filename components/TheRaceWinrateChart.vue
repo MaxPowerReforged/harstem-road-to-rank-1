@@ -54,7 +54,9 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapGetters("roadRankOne", ["getWinratePerFaction"])
+    getWinratePerFaction() {
+      return this.$store.getters[this.seriesName + "/getWinratePerFaction"];
+    }
   }
 });
 </script>

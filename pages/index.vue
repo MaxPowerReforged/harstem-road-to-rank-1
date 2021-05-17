@@ -24,8 +24,7 @@ import { mapGetters, mapActions } from "vuex";
 export default Vue.extend({
   transition: lateralPageTransition,
   methods: {
-    ...mapActions("roadRankOne", ["fetchMetaData", "fetchLadderData"]),
-    ...mapGetters("roadToRankOne", ["getLadderData"])
+    ...mapActions("roadRankOne", ["fetchMetaData", "fetchLadderData"])
   },
   created() {
     this.fetchLadderData();

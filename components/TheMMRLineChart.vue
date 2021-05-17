@@ -160,7 +160,14 @@ export default Vue.extend({
     }
   },
   methods: {
-    ...mapGetters("roadRankOne", ["getLadderData"])
+    getLadderData(): any {
+      return this.$store.getters[this.seriesName + "/getLadderData"];
+    }
+    // ...mapGetters({
+    //   getLadderData(getters: any) {
+    //     return getters[this.seriesName + "/getLadderData"];
+    //   }
+    // })
   },
   created() {
     this.chartPoints = this.getLadderData();

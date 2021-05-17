@@ -33,7 +33,7 @@
             class="nav-link"
             exact-active-class="active-nav-link"
             exact
-            :to="{ path: '/', query: { id: 2465 } }"
+            :to="{ path: '/grandmasterZerg', query: { id: 2465 } }"
             >Grandmaster with Zerg</b-nav-item
           >
         </b-navbar-nav>

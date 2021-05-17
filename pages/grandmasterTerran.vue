@@ -1,15 +1,25 @@
 <template>
   <main>
     <TheProfileCard seriesName="grandmasterTerran" />
-    <TheMMRLineChart seriesName="grandmasterTerran" />
-    <LazyTheRaceWinrateChart seriesName="grandmasterTerran" />
+    <TheMMRLineChart
+      seriesName="grandmasterTerran"
+      :loading="getIsLadderDataLoading"
+    />
+    <LazyTheRaceWinrateChart
+      seriesName="grandmasterTerran"
+      :loading="getIsLadderDataLoading"
+    />
+    <LazyTheMapBarChart
+      seriesName="grandmasterTerran"
+      :loading="getIsLadderDataLoading"
+    />
   </main>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { lateralPageTransition } from "@/utils/transitions";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default Vue.extend({
   transition: lateralPageTransition,
@@ -19,6 +29,9 @@ export default Vue.extend({
   created() {
     this.fetchLadderData();
     this.fetchMetaData();
+  },
+  computed: {
+    ...mapGetters("grandmasterTerran", ["getIsLadderDataLoading"])
   }
 });
 </script>
