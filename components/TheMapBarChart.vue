@@ -14,7 +14,6 @@
 import Vue, { PropType } from "vue";
 import { IMapWinrate } from "@/types/interfaces/IMapWinrate";
 import { mapGetters } from "vuex";
-import { mapChartOptions } from "./mapChartOptions";
 
 export default Vue.extend({
   props: {
@@ -31,42 +30,120 @@ export default Vue.extend({
   },
   data() {
     return {
-      chartOptions: mapChartOptions,
-      maps: [],
       chartData: []
     };
   },
   computed: {
-    ...mapGetters("roadRankOne", ["getWinratePerMap"])
-  },
-  created() {
-    this.chartOptions.series[0].data = this.processWinrateForChart(
-      this.getWinratePerMap as any
-    );
-  },
-  methods: {
-    processWinrateForChart(mapWinrates: IMapWinrate[]): any {
-      let processedWinrates = [] as any[];
-      mapWinrates.forEach(mapWinrate => {
-        let percentage = 0;
-        if (mapWinrate.wins === 0 && mapWinrate.losses === 0) percentage = 0;
-        else {
-          percentage = parseFloat(
-            (
-              (mapWinrate.wins / (mapWinrate.wins + mapWinrate.losses)) *
-              100
-            ).toFixed(0)
-          );
+    ...mapGetters("roadRankOne", ["getWinratePerMap"]),
+    chartOptions() {
+      return {
+        chart: {
+          context: null,
+          type: "column",
+          backgroundColor: "transparent",
+          width: 800,
+          style: {
+            fontFamily: "Eurostile",
+            fontSize: "14px"
+          },
+          scrollablePlotArea: {
+            minWidth: 750,
+            opacity: 0.8
+          }
+        },
+        title: false,
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          series: {
+            color: "#A3C5E1",
+            shadow: {
+              color: "#4585C4",
+              width: 9,
+              offsetX: 0,
+              offsetY: 0
+            },
+            pointWidth: 3,
+            pointPadding: 0.25,
+            borderColor: "#A3C5E1",
+            borderWidth: 0,
+            dataLabels: {
+              enabled: true,
+              format: "<span>{point.y}</span>",
+              style: {
+                color: "white",
+                textOutline: "none",
+                fontWeight: "regular"
+              }
+            },
+            marker: {
+              fillColor: "#E0ECF5",
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          useHTML: true,
+          headerFormat: "",
+          pointFormat: `<span>{point.name}:</span> {point.y:.2f}%
+        <br>Wins: {point.wins}
+        <br>Losses: {point.losses}`,
+          backgroundColor: "rgba(20, 36, 51, 0.9)",
+          borderRadius: 5,
+          boxShadow: "inset 0 0 20px rgb(102 179 255 / 20%)",
+          hideDelay: 1000,
+          style: {
+            color: "#83ADD8",
+            border: "2px solid #22476b",
+            fontFamily: "Source Sans Pro",
+            pointerEvents: "auto",
+            fontSize: "14px"
+          }
+        },
+        xAxis: {
+          type: "category",
+          lineColor: "#22476b",
+          tickColor: "#22476b",
+          labels: {
+            style: {
+              color: "white"
+            },
+            rotation: -52,
+            formatter() {
+              return this.value.substring(0, this.value.length - 3);
+            }
+          },
+          scrollbar: {
+            enabled: true
+          }
+        },
+        yAxis: {
+          labels: {
+            format: "{value}",
+            style: {
+              color: "white"
+            }
+          },
+          title: {
+            text: "Winrate per Map",
+            style: {
+              color: "white",
+              fontFamily: "Eurostile"
+            }
+          },
+          gridLineColor: "#22476b"
+        },
+        series: [{ data: [] }],
+        credits: {
+          enabled: false
         }
-        processedWinrates.push({
-          name: mapWinrate.map,
-          wins: mapWinrate.wins,
-          losses: mapWinrate.losses,
-          y: percentage
-        });
-      });
-      console.log(processedWinrates);
-      return processedWinrates as any[];
+      };
+    }
+  },
+  watch: {
+    getWinratePerMap: function() {
+      this.chartOptions.series[0].data = this.getWinratePerMap;
     }
   }
 });

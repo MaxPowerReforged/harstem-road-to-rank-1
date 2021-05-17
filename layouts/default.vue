@@ -25,12 +25,6 @@ export default defineComponent({
     return {
       backgroundImageURL
     };
-  },
-  methods: {
-    ...mapActions("maps", ["fetchMaps"])
-  },
-  created() {
-    this.fetchMaps();
   }
 });
 

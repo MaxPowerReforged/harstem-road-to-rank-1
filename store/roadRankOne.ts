@@ -21,6 +21,7 @@ export const getters: GetterTree<RootState, RootState> = {
   getLadderData: state => state.ladderData,
   getChartLadderData: state => {
     const tempList = state.ladderData;
+    // @ts-ignore
     return tempList as IMatchChart[];
   },
   getWinratePerFaction: state => {
@@ -61,28 +62,43 @@ export const getters: GetterTree<RootState, RootState> = {
     return winrates;
   },
   getWinratePerMap: state => {
-    console.log(state.ladderData);
-    const mapNames = [
-      ...new Set(
-        state.ladderData.map(match => {
-          match.map;
-        })
-      )
+    let mapNames = [
+      "Romanticide LE",
+      "Oxide LE",
+      "Lightshade LE",
+      "Jagannatha LE",
+      "Blackburn LE",
+      "Beckett Industries LE",
+      "Atmospheres LE"
     ];
-    console.log(mapNames);
     let mapWinrates: looseObject = {};
     mapNames.forEach(mapName => {
       mapWinrates[mapName] = {
         name: mapName,
         wins: 0,
-        losses: 0
+        losses: 0,
+        y: 0
       };
     });
     state.ladderData.forEach(match => {
-      if (match.decision === "Win") mapWinrates[match.map].wins += 1;
-      if (match.decision === "Lose") mapWinrates[match.map].loses += 1;
+      if (mapWinrates[match.map]) {
+        const mapWinrate = mapWinrates[match.map];
+        if (match.decision === "Win") mapWinrate.wins += 1;
+        if (match.decision === "Loss") mapWinrate.losses += 1;
+        if (mapWinrate.wins === 0 && mapWinrate.losses === 0) {
+          mapWinrate.y = 0;
+        } else {
+          mapWinrate.y = parseFloat(
+            (
+              (mapWinrate.wins / (mapWinrate.wins + mapWinrate.losses)) *
+              100
+            ).toFixed(0)
+          );
+        }
+      }
     });
-    return Object.values(mapWinrates);
+    const mapWinrateArray = Object.values(mapWinrates);
+    return mapWinrateArray;
   },
   getIsLadderDataLoading: state => {
     return state.isLadderDataLoading;

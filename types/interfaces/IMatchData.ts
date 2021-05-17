@@ -1,6 +1,6 @@
 export interface IMatchData {
   date?: number;
-  decision: "Win" | "Lose" | "Draw";
+  decision: "Win" | "Loss" | "Draw";
   map: string;
   mmr?: number;
   opponent?: string;
