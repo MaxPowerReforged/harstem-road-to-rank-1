@@ -157,20 +157,13 @@ export default Vue.extend({
           enabled: false
         }
       };
-    }
-  },
-  methods: {
+    },
     getLadderData(): any {
       return this.$store.getters[this.seriesName + "/getLadderData"];
     }
-    // ...mapGetters({
-    //   getLadderData(getters: any) {
-    //     return getters[this.seriesName + "/getLadderData"];
-    //   }
-    // })
   },
   created() {
-    this.chartPoints = this.getLadderData();
+    this.chartPoints = this.getLadderData;
   }
 });
 </script>
