@@ -1,6 +1,6 @@
 export interface IMatchChart {
   x: number;
-  decision: "win" | "lose" | "draw";
+  decision: "Win" | "Loss" | "Draw";
   map: string;
   y: number;
   opponent?: string;

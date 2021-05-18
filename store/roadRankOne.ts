@@ -69,7 +69,7 @@ export const getters: GetterTree<RootState, RootState> = {
       "Jagannatha LE",
       "Blackburn LE",
       "Beckett Industries LE",
-      "Atmospheres LE"
+      "2000 Atmospheres LE"
     ];
     let mapWinrates: looseObject = {};
     mapNames.forEach(mapName => {

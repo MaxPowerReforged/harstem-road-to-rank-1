@@ -42,5 +42,6 @@ main {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  padding-bottom: 50px;
 }
 </style>
