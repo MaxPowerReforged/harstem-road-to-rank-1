@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/grandmasterTerran", {data:[{}],fetch:{},mutations:[["grandmasterTerran\u002FemptyLadderData",void 0],["grandmasterTerran\u002FsetIsLadderDataLoading",true]]});
