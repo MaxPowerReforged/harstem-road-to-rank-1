@@ -122,9 +122,13 @@ export default Vue.extend({
             useHTML: true,
             formatter: function(): string {
               const index = this.value;
-              return new Date(
-                ctx.chartPoints[index].date * 1000
-              ).toLocaleDateString();
+              if (ctx.chartPoints[index]) {
+                return new Date(
+                  ctx.chartPoints[index].date * 1000
+                ).toLocaleDateString();
+              } else {
+                return "";
+              }
             },
             style: {
               color: "white"
