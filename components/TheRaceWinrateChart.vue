@@ -5,13 +5,27 @@
   >
     <h2>Race Winrate</h2>
     <div class="chart-container">
-      <RaceChartCard seriesName: seriesName
-      :winrateData="getWinratePerFaction.protoss" :icon="iconProtoss"
-      v-if="!loading" race="protoss" /> <RaceChartCard seriesName: seriesName
-      :winrateData="getWinratePerFaction.terran" :icon="iconTerran"
-      v-if="!loading" race="terran" /> <RaceChartCard seriesName: seriesName
-      :winrateData="getWinratePerFaction.zerg" :icon="iconZerg" v-if="!loading"
-      race="zerg" />
+      <RaceChartCard
+        :seriesName="seriesName"
+        :winrateData="getWinratePerFaction.protoss"
+        :icon="iconProtoss"
+        v-if="!loading"
+        race="protoss"
+      />
+      <RaceChartCard
+        :seriesName="seriesName"
+        :winrateData="getWinratePerFaction.terran"
+        :icon="iconTerran"
+        v-if="!loading"
+        race="terran"
+      />
+      <RaceChartCard
+        :seriesName="seriesName"
+        :winrateData="getWinratePerFaction.zerg"
+        :icon="iconZerg"
+        v-if="!loading"
+        race="zerg"
+      />
       <div
         class="loading-placeholder loading-placeholder-winrate"
         v-if="loading"
